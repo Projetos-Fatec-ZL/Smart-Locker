@@ -1,0 +1,21 @@
+.admin-layout {
+  min-height: 100vh;
+
+  background-color: #f4f7fb;
+}
+
+.admin-content {
+  min-height: 100vh;
+
+  margin-left: 250px;
+
+  padding: 30px;
+}
+
+@media (max-width: 900px) {
+  .admin-content {
+    margin-left: 210px;
+
+    padding: 22px;
+  }
+}

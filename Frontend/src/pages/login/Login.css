@@ -1,0 +1,410 @@
+/* =========================
+   TELA DE LOGIN
+========================= */
+
+.login-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 38% 62%;
+
+  background-color: #f6f8fc;
+}
+
+
+/* =========================
+   PAINEL ESQUERDO
+========================= */
+
+.login-banner {
+  min-height: 100vh;
+
+  background-color: #1d3e67;
+  color: #ffffff;
+
+  padding: 60px 64px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* LOGO */
+
+.login-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.login-logo-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background-color: rgba(255, 255, 255, 0.08);
+
+  font-size: 22px;
+}
+
+.login-logo h2 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.login-logo span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 13px;
+
+  color: #b7c7db;
+}
+
+
+/* CONTEÚDO ESQUERDO */
+
+.login-banner-content {
+  margin-top: 70px;
+
+  max-width: 440px;
+}
+
+.login-banner-content h1 {
+  margin: 0 0 24px;
+
+  font-size: 42px;
+  line-height: 1.1;
+
+  font-weight: 700;
+}
+
+.login-banner-content > p {
+  margin: 0;
+
+  font-size: 17px;
+  line-height: 1.55;
+
+  color: #c4d1e1;
+}
+
+
+/* BENEFÍCIOS */
+
+.login-beneficios {
+  margin-top: 42px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.login-beneficios p {
+  margin: 0;
+
+  font-size: 16px;
+
+  color: #e0e7f0;
+}
+
+
+/* =========================
+   LADO DIREITO
+========================= */
+
+.login-form-area {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px;
+}
+
+
+.login-container {
+  width: 100%;
+  max-width: 460px;
+}
+
+
+/* CABEÇALHO */
+
+.login-header {
+  margin-bottom: 36px;
+}
+
+.login-header h1 {
+  margin: 0 0 10px;
+
+  font-size: 32px;
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.login-header p {
+  margin: 0;
+
+  font-size: 16px;
+
+  color: #667085;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.login-form-group {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 22px;
+}
+
+.login-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #344054;
+}
+
+.login-form-group input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 16px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 8px;
+
+  background-color: #ffffff;
+
+  color: #101828;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.login-form-group input::placeholder {
+  color: #98a2b3;
+}
+
+.login-form-group input:focus {
+  border-color: #326be8;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(50, 107, 232, 0.12);
+}
+
+
+/* =========================
+   BOTÃO ENTRAR
+========================= */
+
+.login-button {
+  width: 100%;
+  height: 52px;
+
+  margin-top: 4px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: #326be8;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.login-button:hover {
+  background-color: #2458ca;
+}
+
+.login-button:active {
+  transform: scale(0.99);
+}
+
+.login-button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+.login-links {
+  width: 100%;
+
+  margin-top: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  font-size: 14px;
+}
+
+.login-links a {
+  color: #326be8;
+
+  text-decoration: none;
+
+  transition: color 0.2s;
+}
+
+.login-links a:hover {
+  color: #214da9;
+
+  text-decoration: underline;
+}
+
+
+/* =========================
+   ERRO
+========================= */
+
+.login-erro {
+  margin-bottom: 20px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #fecdca;
+
+  border-radius: 8px;
+
+  background-color: #fef3f2;
+
+  color: #b42318;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/* NOTEBOOK / TABLET */
+
+@media (max-width: 1100px) {
+
+  .login-page {
+    grid-template-columns: 42% 58%;
+  }
+
+  .login-banner {
+    padding: 48px 40px;
+  }
+
+  .login-banner-content h1 {
+    font-size: 36px;
+  }
+
+  .login-form-area {
+    padding: 40px;
+  }
+
+}
+
+
+/* TABLET */
+
+@media (max-width: 850px) {
+
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-banner {
+    display: none;
+  }
+
+  .login-form-area {
+    min-height: 100vh;
+
+    padding: 40px 24px;
+  }
+
+  .login-container {
+    max-width: 500px;
+  }
+
+}
+
+
+/* CELULAR */
+
+@media (max-width: 500px) {
+
+  .login-form-area {
+    padding: 28px 20px;
+  }
+
+  .login-header {
+    margin-bottom: 30px;
+  }
+
+  .login-header h1 {
+    font-size: 27px;
+  }
+
+  .login-header p {
+    font-size: 14px;
+  }
+
+  .login-form-group input {
+    height: 50px;
+  }
+
+  .login-button {
+    height: 50px;
+  }
+
+  .login-links {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 14px;
+  }
+
+}
