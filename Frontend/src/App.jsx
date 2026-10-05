@@ -9,6 +9,7 @@ import PrimeiroAcesso from "./pages/PrimeiroAcesso/PrimeiroAcesso";
 
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
+import Armarios from "./pages/admin/Armarios/Armarios";
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
             path="dashboard"
             element={<Dashboard />}
           />
+          <Route
+    path="armarios"
+    element={<Armarios />}
+     />
         </Route>
 
       </Routes>

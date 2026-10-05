@@ -154,4 +154,15 @@
   .sidebar {
     width: 210px;
   }
+  @media (max-width: 1000px) {
+  .sidebar {
+    width: 210px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
 }
