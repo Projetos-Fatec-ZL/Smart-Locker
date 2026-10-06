@@ -1,0 +1,471 @@
+.funcionarios-page {
+  width: 100%;
+}
+
+
+/* CABEÇALHO */
+
+.funcionarios-header {
+  margin-bottom: 26px;
+}
+
+.funcionarios-header > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #8995aa;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+}
+
+.funcionarios-header h1 {
+  margin: 0 0 8px;
+
+  color: #101828;
+
+  font-size: 30px;
+}
+
+.funcionarios-header p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 15px;
+}
+
+
+/* CARDS */
+
+.funcionarios-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 24px;
+}
+
+.funcionario-stat-card {
+  min-height: 135px;
+
+  padding: 20px;
+
+  border: 1px solid #e1e6ee;
+
+  border-radius: 12px;
+
+  background-color: #ffffff;
+
+  box-shadow:
+    0 2px 4px
+    rgba(15, 23, 42, 0.05);
+}
+
+.funcionario-stat-icon {
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  font-size: 20px;
+}
+
+.funcionario-stat-icon.total {
+  background-color: #e9e7ff;
+}
+
+.funcionario-stat-icon.com-armario {
+  background-color: #d5fae8;
+}
+
+.funcionario-stat-icon.sem-armario {
+  background-color: #eee9ff;
+}
+
+.funcionario-stat-icon.fila {
+  background-color: #fff1c7;
+}
+
+.funcionario-stat-card strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #101828;
+
+  font-size: 29px;
+}
+
+.funcionario-stat-card > span {
+  color: #667085;
+
+  font-size: 14px;
+}
+
+
+/* FILTROS */
+
+.funcionarios-filtros {
+  margin-bottom: 14px;
+
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  border: 1px solid #e1e6ee;
+
+  border-radius: 12px;
+
+  background-color: white;
+}
+
+.funcionarios-filtros input {
+  min-width: 220px;
+
+  flex: 1;
+
+  height: 42px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+}
+
+.funcionarios-filtros select {
+  min-width: 180px;
+
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  background-color: white;
+
+  color: #344054;
+}
+
+.btn-cadastrar-funcionario {
+  height: 42px;
+
+  padding: 0 18px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background-color: #2f68e9;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* TABELA */
+
+.funcionarios-tabela-container {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid #e1e6ee;
+
+  border-radius: 12px;
+
+  background-color: white;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.funcionarios-tabela {
+  width: 100%;
+
+  min-width: 800px;
+
+  border-collapse: collapse;
+}
+
+.funcionarios-tabela th {
+  padding: 13px 16px;
+
+  border-bottom: 1px solid #e4e7ec;
+
+  background-color: #f8fafc;
+
+  color: #98a2b3;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+
+  text-transform: uppercase;
+}
+
+.funcionarios-tabela td {
+  padding: 14px 16px;
+
+  border-bottom: 1px solid #eef1f4;
+
+  color: #475467;
+
+  font-size: 13px;
+}
+
+.funcionarios-tabela tbody tr:hover {
+  background-color: #fafcff;
+}
+
+
+/* FUNCIONÁRIO */
+
+.funcionario-info {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.funcionario-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background-color: #edf4ff;
+
+  color: #2563eb;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.funcionario-info strong {
+  display: block;
+
+  color: #101828;
+}
+
+.funcionario-inativo {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #98a2b3;
+
+  font-size: 11px;
+}
+
+
+/* BADGES */
+
+.setor-badge {
+  display: inline-block;
+
+  padding: 4px 8px;
+
+  border: 1px solid #e0e6ee;
+
+  border-radius: 5px;
+
+  background-color: #f8fafc;
+}
+
+.armario-chip {
+  padding: 4px 8px;
+
+  border-radius: 5px;
+
+  background-color: #edf4ff;
+
+  color: #2f68e9;
+
+  font-weight: 700;
+}
+
+.funcionario-status {
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.funcionario-status.com-armario {
+  background-color: #dcfae6;
+
+  color: #079455;
+}
+
+.funcionario-status.fila {
+  background-color: #fff4cc;
+
+  color: #b54708;
+}
+
+.sem-dado {
+  color: #98a2b3;
+}
+
+
+/* AÇÕES */
+
+.funcionario-acoes {
+  display: flex;
+
+  gap: 7px;
+}
+
+.btn-acao {
+  padding: 7px 10px;
+
+  border: 1px solid #e0e6ee;
+
+  border-radius: 6px;
+
+  background-color: #f8fafc;
+
+  color: #344054;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.btn-acao:hover {
+  background-color: #eef2f7;
+}
+
+.nenhum-funcionario {
+  padding: 30px !important;
+
+  text-align: center;
+}
+
+
+/* MODAIS */
+
+.funcionario-modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 480px;
+
+  padding: 30px;
+
+  border-radius: 14px;
+
+  background-color: white;
+
+  box-shadow:
+    0 20px 50px
+    rgba(15, 23, 42, 0.2);
+}
+
+.funcionario-modal h2 {
+  margin: 0 0 8px;
+
+  color: #101828;
+}
+
+.funcionario-modal label {
+  display: block;
+
+  margin: 18px 0 7px;
+
+  color: #344054;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.funcionario-modal input,
+.funcionario-modal select {
+  width: 100%;
+  height: 45px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  background-color: white;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1200px) {
+  .funcionarios-cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .funcionarios-filtros {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .funcionarios-filtros input,
+  .funcionarios-filtros select,
+  .btn-cadastrar-funcionario {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .funcionarios-header h1 {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 600px) {
+  .funcionarios-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .funcionario-stat-card {
+    min-height: 120px;
+  }
+
+  .funcionario-modal {
+    padding: 24px 20px;
+  }
+}

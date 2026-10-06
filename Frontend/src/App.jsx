@@ -7,9 +7,13 @@ import {
 import Login from "./pages/login/Login";
 import PrimeiroAcesso from "./pages/PrimeiroAcesso/PrimeiroAcesso";
 
+
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
 import Armarios from "./pages/admin/Armarios/Armarios";
+import Funcionarios from "./pages/admin/Funcionarios/Funcionarios";
+import ListaEspera from "./pages/admin/ListaEspera/ListaEspera";
+import AchadosPerdidos from "./pages/admin/AchadosPerdidos/AchadosPerdidos";
 
 function App() {
   return (
@@ -30,14 +34,29 @@ function App() {
           path="/admin"
           element={<AdminLayout />}
         >
+
           <Route
             path="dashboard"
             element={<Dashboard />}
           />
+
           <Route
-    path="armarios"
-    element={<Armarios />}
-     />
+            path="armarios"
+            element={<Armarios />}
+          />
+
+          <Route
+            path="funcionarios"
+            element={<Funcionarios />}
+          />
+          <Route
+  path="lista-espera"
+  element={<ListaEspera />}
+/>
+ <Route
+  path="achados-perdidos"
+  element={<AchadosPerdidos />}
+/>
         </Route>
 
       </Routes>

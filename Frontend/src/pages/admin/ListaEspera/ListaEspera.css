@@ -1,0 +1,543 @@
+.lista-espera-page {
+  width: 100%;
+}
+
+
+/* CABEÇALHO */
+
+.lista-espera-header {
+  margin-bottom: 28px;
+}
+
+.lista-espera-header > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #8995aa;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+}
+
+.lista-espera-header h1 {
+  margin: 0 0 8px;
+
+  color: #101828;
+
+  font-size: 30px;
+}
+
+.lista-espera-header p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 15px;
+}
+
+
+/* RESUMO */
+
+.fila-resumo {
+  display: flex;
+  gap: 14px;
+
+  margin-bottom: 24px;
+}
+
+.fila-total-card,
+.proximo-card {
+  min-height: 140px;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  background-color: #ffffff;
+}
+
+.fila-total-card {
+  width: 180px;
+
+  border: 1px solid #e1e6ee;
+
+  box-shadow:
+    0 2px 4px
+    rgba(15, 23, 42, 0.05);
+}
+
+.proximo-card {
+  width: 240px;
+
+  border: 1px solid #2f68e9;
+
+  background-color: #f0f6ff;
+}
+
+.fila-total-card > span,
+.proximo-card > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #8491a7;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+}
+
+.proximo-card > span {
+  color: #2f68e9;
+}
+
+.fila-total-card strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #101828;
+
+  font-size: 36px;
+}
+
+.fila-total-card p {
+  margin: 0;
+
+  color: #475467;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.proximo-card strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #101828;
+
+  font-size: 16px;
+}
+
+.proximo-card p {
+  margin: 0;
+
+  color: #475467;
+
+  font-size: 13px;
+}
+
+
+/* FILTROS */
+
+.lista-espera-filtros {
+  margin-bottom: 14px;
+
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid #e1e6ee;
+
+  border-radius: 12px;
+
+  background-color: white;
+}
+
+.lista-espera-filtros input {
+  min-width: 220px;
+
+  flex: 1;
+
+  height: 42px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+}
+
+.lista-espera-filtros select {
+  min-width: 170px;
+
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  background-color: white;
+
+  color: #344054;
+}
+
+.btn-atualizar-fila {
+  height: 42px;
+
+  padding: 0 18px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  background-color: white;
+
+  color: #344054;
+
+  cursor: pointer;
+}
+
+
+/* TABELA */
+
+.lista-espera-tabela-container {
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid #e1e6ee;
+
+  border-radius: 12px;
+
+  background-color: white;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.lista-espera-tabela {
+  width: 100%;
+
+  min-width: 1050px;
+
+  border-collapse: collapse;
+}
+
+.lista-espera-tabela th {
+  padding: 13px 18px;
+
+  border-bottom: 1px solid #e4e7ec;
+
+  background-color: #f8fafc;
+
+  color: #98a2b3;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+
+  text-transform: uppercase;
+}
+
+.lista-espera-tabela td {
+  padding: 14px 18px;
+
+  border-bottom: 1px solid #eef1f4;
+
+  color: #475467;
+
+  font-size: 13px;
+}
+
+.lista-espera-tabela tbody tr:hover {
+  background-color: #fafcff;
+}
+
+
+/* PRIMEIRO DA FILA */
+
+.proximo-fila-row {
+  background-color: #eff6ff;
+}
+
+.proximo-fila-row td:first-child {
+  border-left: 3px solid #2f68e9;
+}
+
+.posicao-container {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.posicao {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background-color: #e9eef5;
+
+  color: #475467;
+
+  font-weight: 700;
+}
+
+.posicao.primeiro {
+  background-color: #2f68e9;
+
+  color: white;
+}
+
+.proximo-badge {
+  padding: 4px 7px;
+
+  border: 1px solid #2f68e9;
+
+  border-radius: 999px;
+
+  color: #2f68e9;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* FUNCIONÁRIO */
+
+.fila-funcionario {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.fila-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid #dce4ee;
+
+  border-radius: 50%;
+
+  background-color: #f4f7fb;
+
+  color: #2563eb;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.fila-funcionario strong {
+  color: #101828;
+}
+
+
+/* BADGES */
+
+.fila-setor {
+  padding: 4px 8px;
+
+  border: 1px solid #dfe5ec;
+
+  border-radius: 5px;
+
+  background-color: #f8fafc;
+}
+
+.fila-status {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border: 1px solid #f5cf62;
+
+  border-radius: 999px;
+
+  background-color: #fff4cc;
+
+  color: #d97706;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* AÇÕES */
+
+.fila-acoes {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.btn-fila-acao,
+.btn-associar-fila {
+  padding: 7px 10px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.btn-fila-acao {
+  border: none;
+
+  background-color: #f3f6fa;
+
+  color: #344054;
+}
+
+.btn-associar-fila {
+  border: none;
+
+  background-color: #2f68e9;
+
+  color: white;
+
+  font-weight: 600;
+}
+
+.btn-associar-fila:hover {
+  background-color: #2457cc;
+}
+
+.fila-vazia {
+  padding: 30px !important;
+
+  text-align: center;
+}
+
+
+/* MODAL */
+
+.lista-espera-modal {
+  position: relative;
+
+  width: 100%;
+  max-width: 640px;
+
+  padding: 30px;
+
+  border-radius: 14px;
+
+  background-color: white;
+
+  box-shadow:
+    0 20px 50px
+    rgba(15, 23, 42, 0.2);
+}
+
+.lista-espera-modal h2 {
+  margin: 0 0 8px;
+
+  color: #101828;
+
+  font-size: 23px;
+}
+
+.lista-espera-modal label {
+  display: block;
+
+  margin: 26px 0 8px;
+
+  color: #344054;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.lista-espera-modal select {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 7px;
+
+  background-color: white;
+
+  color: #344054;
+
+  font-size: 15px;
+}
+
+.sem-armarios-livres {
+  margin-top: 10px;
+
+  color: #b42318;
+
+  font-size: 13px;
+}
+
+.btn-modal-salvar:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+  .lista-espera-filtros {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .fila-resumo {
+    flex-direction: column;
+  }
+
+  .fila-total-card,
+  .proximo-card {
+    width: 100%;
+  }
+
+  .lista-espera-filtros {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .lista-espera-filtros input,
+  .lista-espera-filtros select,
+  .btn-atualizar-fila {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .lista-espera-header h1 {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 600px) {
+  .lista-espera-modal {
+    padding: 24px 20px;
+  }
+
+  .fila-total-card,
+  .proximo-card {
+    min-height: auto;
+  }
+}

@@ -39,3 +39,335 @@ button {
 a {
   color: inherit;
 }
+/* ========================================
+   ACESSIBILIDADE - TEMA ESCURO
+======================================== */
+
+html.dark-theme,
+html.dark-theme body,
+html.dark-theme #root {
+  background-color: #0f172a;
+
+  color: #ffffff;
+}
+
+html.dark-theme .admin-layout,
+html.dark-theme .admin-content {
+  background-color: #0f172a;
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   TEXTOS GERAIS
+========================= */
+
+html.dark-theme .admin-content,
+html.dark-theme .admin-content h1,
+html.dark-theme .admin-content h2,
+html.dark-theme .admin-content h3,
+html.dark-theme .admin-content h4,
+html.dark-theme .admin-content p,
+html.dark-theme .admin-content label,
+html.dark-theme .admin-content strong {
+  color: #ffffff;
+}
+
+
+/* textos secundários */
+
+html.dark-theme .dashboard-breadcrumb,
+html.dark-theme .armarios-header > span,
+html.dark-theme .funcionarios-header > span,
+html.dark-theme .lista-espera-header > span,
+html.dark-theme .achados-header > span {
+  color: #cbd5e1;
+}
+
+html.dark-theme .dashboard-header p,
+html.dark-theme .armarios-header p,
+html.dark-theme .funcionarios-header p,
+html.dark-theme .lista-espera-header p,
+html.dark-theme .achados-header p {
+  color: #e2e8f0;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+html.dark-theme .dashboard-card,
+html.dark-theme .dashboard-section,
+html.dark-theme .armario-stat-card,
+html.dark-theme .funcionario-stat-card,
+html.dark-theme .fila-total-card,
+html.dark-theme .proximo-card,
+html.dark-theme .achados-card {
+  border-color: #334155;
+
+  background-color: #1e293b;
+
+  color: #ffffff;
+}
+
+html.dark-theme .dashboard-card > span,
+html.dark-theme .armario-stat-card > span,
+html.dark-theme .funcionario-stat-card > span,
+html.dark-theme .achados-card > span,
+html.dark-theme .fila-total-card p,
+html.dark-theme .proximo-card p {
+  color: #ffffff;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+html.dark-theme .section-title h2,
+html.dark-theme .section-title p {
+  color: #ffffff;
+}
+
+html.dark-theme .distribution-top,
+html.dark-theme .distribution-top div,
+html.dark-theme .distribution-top span,
+html.dark-theme .distribution-top strong,
+html.dark-theme .distribution-top small {
+  color: #ffffff;
+}
+
+html.dark-theme .distribution-bar {
+  background-color: #334155;
+}
+
+html.dark-theme .movimentacoes-header h2,
+html.dark-theme .movimentacoes-header p {
+  color: #ffffff;
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+html.dark-theme .armarios-filtros,
+html.dark-theme .funcionarios-filtros,
+html.dark-theme .lista-espera-filtros,
+html.dark-theme .achados-filtros {
+  border-color: #334155;
+
+  background-color: #1e293b;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+html.dark-theme input,
+html.dark-theme select,
+html.dark-theme textarea {
+  border-color: #475569;
+
+  background-color: #0f172a;
+
+  color: #ffffff;
+}
+
+html.dark-theme input::placeholder,
+html.dark-theme textarea::placeholder {
+  color: #cbd5e1;
+}
+
+html.dark-theme select option {
+  background-color: #0f172a;
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   TABELAS
+========================= */
+
+html.dark-theme .dashboard-table-wrapper,
+html.dark-theme .armarios-tabela-container,
+html.dark-theme .funcionarios-tabela-container,
+html.dark-theme .lista-espera-tabela-container,
+html.dark-theme .achados-tabela-container {
+  border-color: #334155;
+
+  background-color: #1e293b;
+}
+
+html.dark-theme table {
+  background-color: #1e293b;
+}
+
+html.dark-theme table th {
+  border-color: #334155;
+
+  background-color: #172033;
+
+  color: #dbeafe;
+}
+
+html.dark-theme table td {
+  border-color: #334155;
+
+  color: #ffffff;
+}
+
+html.dark-theme table td span,
+html.dark-theme table td strong {
+  color: inherit;
+}
+
+html.dark-theme table tbody tr:hover {
+  background-color: #263449;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+html.dark-theme .setor-badge,
+html.dark-theme .vestiario-badge,
+html.dark-theme .local-badge,
+html.dark-theme .fila-setor {
+  border-color: #475569;
+
+  background-color: #263449;
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   AVATARES
+========================= */
+
+html.dark-theme .funcionario-avatar,
+html.dark-theme .fila-avatar {
+  background-color: #334155;
+
+  color: #ffffff;
+}
+
+
+/* =========================
+   PRÓXIMO DA FILA
+========================= */
+
+html.dark-theme .proximo-fila-row {
+  background-color: #172554;
+}
+
+
+/* =========================
+   BOTÕES SECUNDÁRIOS
+========================= */
+
+html.dark-theme .btn-acao,
+html.dark-theme .btn-fila-acao,
+html.dark-theme .btn-achados-acao,
+html.dark-theme .btn-dashboard-secondary,
+html.dark-theme .btn-modal-cancelar,
+html.dark-theme .btn-atualizar-fila {
+  border-color: #475569;
+
+  background-color: #263449;
+
+  color: #ffffff;
+}
+
+html.dark-theme .btn-acao:hover,
+html.dark-theme .btn-fila-acao:hover,
+html.dark-theme .btn-achados-acao:hover,
+html.dark-theme .btn-dashboard-secondary:hover {
+  background-color: #334155;
+}
+
+
+/* =========================
+   MODAIS
+========================= */
+
+html.dark-theme .armario-modal,
+html.dark-theme .funcionario-modal,
+html.dark-theme .lista-espera-modal,
+html.dark-theme .achados-modal {
+  background-color: #1e293b;
+
+  color: #ffffff;
+}
+
+html.dark-theme .armario-modal h2,
+html.dark-theme .funcionario-modal h2,
+html.dark-theme .lista-espera-modal h2,
+html.dark-theme .achados-modal h2 {
+  color: #ffffff;
+}
+
+html.dark-theme .modal-dados p {
+  border-color: #334155;
+
+  color: #ffffff;
+}
+
+html.dark-theme .modal-subtitulo {
+  color: #e2e8f0;
+}
+
+html.dark-theme .modal-fechar {
+  color: #ffffff;
+}
+
+
+/* =========================
+   BOTÕES DE ACESSIBILIDADE
+========================= */
+
+html.dark-theme .accessibility-button {
+  border-color: #475569;
+
+  background-color: #1e293b;
+
+  color: #ffffff;
+}
+
+html.dark-theme .accessibility-button:hover {
+  background-color: #334155;
+}
+
+html.dark-theme .accessibility-button.active {
+  border-color: #60a5fa;
+
+  background-color: #1e3a5f;
+
+  color: #ffffff;
+}
+
+
+/* ========================================
+   FONTE MAIOR
+======================================== */
+
+html.font-large body {
+  zoom: 1.08;
+}
+/* CÓDIGO DOS ARMÁRIOS NO TEMA ESCURO */
+
+html.dark-theme .locker-code,
+html.dark-theme .armario-codigo,
+html.dark-theme .armario-chip {
+  background-color: #1e3a5f;
+
+  color: #60a5fa !important;
+
+  border: 1px solid #315784;
+}
