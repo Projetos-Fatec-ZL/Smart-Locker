@@ -155,9 +155,10 @@ function Login() {
               Primeiro acesso
             </Link>
 
-            <a href="#">
-              Esqueci minha senha
-            </a>
+          <Link to="/esqueci-senha">
+            Esqueci minha senha
+          </Link>
+          
           </div>
         </div>
       </section>

@@ -1,0 +1,577 @@
+
+/* ========================================
+   PÁGINA INICIAL DO FUNCIONÁRIO
+======================================== */
+
+.inicio-funcionario {
+  width: 100%;
+  min-width: 0;
+  color: #101828;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.inicio-cabecalho {
+  margin-bottom: 28px;
+}
+
+.inicio-etiqueta {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #8491a7;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.inicio-cabecalho h1 {
+  margin: 0 0 8px;
+
+  color: #101828;
+
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.inicio-cabecalho p {
+  margin: 0;
+
+  color: #526783;
+  font-size: 15px;
+}
+
+
+/* ========================================
+   TÍTULO DA SEÇÃO
+======================================== */
+
+.inicio-secao-titulo {
+  margin: 0 0 14px;
+
+  color: #344054;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+
+/* ========================================
+   CARD PRINCIPAL
+======================================== */
+
+.inicio-card-principal {
+  width: 100%;
+  min-width: 0;
+
+  padding: 22px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+
+/* TOPO DO CARD */
+
+.inicio-card-topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.inicio-icone-armario {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background-color: #eef4ff;
+  color: #326be8;
+}
+
+.inicio-identificacao {
+  min-width: 0;
+  flex: 1;
+}
+
+.inicio-identificacao h3 {
+  margin: 0 0 5px;
+
+  color: #101828;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.inicio-identificacao p {
+  margin: 0;
+
+  color: #526783;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* STATUS DO ARMÁRIO */
+
+.inicio-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.inicio-status.ocupado {
+  border: 1px solid #bfdbfe;
+
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+
+/* ========================================
+   DETALHES DO ARMÁRIO
+======================================== */
+
+.inicio-detalhes {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-top: 18px;
+}
+
+.inicio-detalhe {
+  min-width: 0;
+  min-height: 65px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 12px 15px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 9px;
+
+  background-color: #f1f5f9;
+}
+
+.inicio-detalhe > span:first-child {
+  color: #8491a7;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.inicio-detalhe > strong {
+  overflow-wrap: anywhere;
+
+  color: #101828;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.inicio-detalhe > .inicio-valor-azul {
+  color: #2458ca;
+}
+
+
+/* STATUS DA CHAVE */
+
+.inicio-status-chave {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  width: fit-content;
+  max-width: 100%;
+
+  padding: 5px 9px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  overflow-wrap: anywhere;
+}
+
+.inicio-status-ponto {
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.inicio-status-chave.entregue {
+  border-color: #bfdbfe;
+
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.inicio-status-chave.disponivel {
+  border-color: #a7f3d0;
+
+  background-color: #dcfce7;
+  color: #047857;
+}
+
+.inicio-status-chave.aguardando {
+  border-color: #fcd34d;
+
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+
+/* ========================================
+   SEM ARMÁRIO
+======================================== */
+
+.inicio-sem-armario {
+  padding-top: 18px;
+}
+
+.inicio-sem-armario p {
+  margin: 0 0 15px;
+
+  color: #526783;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.inicio-botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 42px;
+
+  padding: 10px 15px;
+
+  border-radius: 8px;
+
+  background-color: #326be8;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: background-color 0.2s;
+}
+
+.inicio-botao:hover {
+  background-color: #2458ca;
+}
+
+
+/* ========================================
+   ATALHOS
+======================================== */
+
+.inicio-atalhos {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 22px;
+}
+
+.inicio-atalho {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 20px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+  color: #101828;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.05);
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.inicio-atalho:hover {
+  transform: translateY(-2px);
+
+  border-color: #b7cdf8;
+
+  box-shadow:
+    0 5px 12px rgba(15, 23, 42, 0.08);
+}
+
+.inicio-atalho-icone {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+}
+
+.inicio-atalho-icone.armario {
+  background-color: #eef4ff;
+  color: #326be8;
+}
+
+.inicio-atalho-icone.objetos {
+  background-color: #fff3d6;
+  color: #b7791f;
+}
+
+.inicio-atalho-texto {
+  min-width: 0;
+  flex: 1;
+}
+
+.inicio-atalho-texto strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #101828;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.inicio-atalho-texto p {
+  margin: 0;
+
+  color: #526783;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.inicio-atalho-seta {
+  flex-shrink: 0;
+  color: #8491a7;
+  transition: transform 0.2s;
+}
+
+.inicio-atalho:hover .inicio-atalho-seta {
+  transform: translateX(3px);
+  color: #326be8;
+}
+
+
+/* ========================================
+   TEMA ESCURO
+======================================== */
+
+html.dark-theme .inicio-funcionario {
+  color: #f8fafc;
+}
+
+html.dark-theme .inicio-cabecalho h1,
+html.dark-theme .inicio-secao-titulo,
+html.dark-theme .inicio-identificacao h3,
+html.dark-theme .inicio-atalho-texto strong {
+  color: #f8fafc;
+}
+
+html.dark-theme .inicio-etiqueta {
+  color: #b8c5d9;
+}
+
+html.dark-theme .inicio-cabecalho p,
+html.dark-theme .inicio-identificacao p,
+html.dark-theme .inicio-sem-armario p,
+html.dark-theme .inicio-atalho-texto p {
+  color: #cbd5e1;
+}
+
+html.dark-theme .inicio-card-principal,
+html.dark-theme .inicio-atalho {
+  border-color: #334155;
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+html.dark-theme .inicio-card-topo {
+  border-bottom-color: #334155;
+}
+
+html.dark-theme .inicio-icone-armario,
+html.dark-theme .inicio-atalho-icone.armario {
+  background-color: #263b59;
+  color: #93c5fd;
+}
+
+html.dark-theme .inicio-atalho-icone.objetos {
+  background-color: #453719;
+  color: #fcd34d;
+}
+
+html.dark-theme .inicio-detalhe {
+  border-color: #334155;
+  background-color: #27364c;
+}
+
+html.dark-theme .inicio-detalhe > span:first-child {
+  color: #b8c5d9;
+}
+
+html.dark-theme .inicio-detalhe > strong,
+html.dark-theme .inicio-detalhe > .inicio-valor-azul {
+  color: #93c5fd;
+}
+
+html.dark-theme .inicio-detalhe:nth-child(2) > strong {
+  color: #f8fafc;
+}
+
+html.dark-theme .inicio-status.ocupado,
+html.dark-theme .inicio-status-chave.entregue {
+  border-color: #315784;
+  background-color: #1e3a5f;
+  color: #bfdbfe;
+}
+
+html.dark-theme .inicio-status-chave.disponivel {
+  border-color: #166534;
+  background-color: #14352b;
+  color: #bbf7d0;
+}
+
+html.dark-theme .inicio-status-chave.aguardando {
+  border-color: #854d0e;
+  background-color: #422b13;
+  color: #fde68a;
+}
+
+html.dark-theme .inicio-atalho-seta {
+  color: #b8c5d9;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1000px) {
+  .inicio-atalhos {
+    gap: 10px;
+  }
+
+  .inicio-atalho {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .inicio-cabecalho h1 {
+    font-size: 27px;
+  }
+
+  .inicio-card-principal {
+    padding: 18px;
+  }
+
+  .inicio-atalho {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .inicio-detalhes,
+  .inicio-atalhos {
+    grid-template-columns: 1fr;
+  }
+
+  .inicio-cabecalho h1 {
+    font-size: 24px;
+  }
+
+  .inicio-card-principal {
+    padding: 14px;
+  }
+
+  .inicio-card-topo {
+    flex-wrap: wrap;
+  }
+
+  .inicio-identificacao {
+    flex-basis: calc(100% - 60px);
+  }
+
+  .inicio-status {
+    margin-left: auto;
+  }
+
+  .inicio-detalhe {
+    min-height: 60px;
+  }
+
+  .inicio-atalho {
+    padding: 16px;
+  }
+}

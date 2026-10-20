@@ -1,0 +1,475 @@
+
+.chaves-page {
+  width: 100%;
+  min-width: 0;
+  color: #101828;
+}
+
+.chaves-header {
+  margin-bottom: 26px;
+}
+
+.chaves-header > span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8995aa;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.chaves-header h1 {
+  margin: 0 0 8px;
+  color: #101828;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.chaves-header p {
+  margin: 0;
+  color: #475467;
+  font-size: 15px;
+}
+
+.chaves-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.chaves-stat-card {
+  min-width: 0;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #dfe6ef;
+  border-radius: 12px;
+  box-shadow: 0 2px 3px rgb(16 24 40 / 6%);
+}
+
+.chaves-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 10px;
+  border-radius: 9px;
+  font-size: 17px;
+}
+
+.chave-icon {
+  background: #eff6ff;
+}
+
+.espera-icon {
+  background: #fef3c7;
+}
+
+.entregue-icon {
+  background: #dcfce7;
+}
+
+.chaves-stat-card strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #101828;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.chaves-stat-card > span {
+  color: #475467;
+  font-size: 13px;
+}
+
+.chaves-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  background: #fff;
+  border: 1px solid #dfe6ef;
+  border-radius: 12px;
+  box-shadow: 0 2px 3px rgb(16 24 40 / 5%);
+}
+
+.chaves-toolbar input,
+.chaves-toolbar select {
+  min-width: 0;
+  height: 42px;
+  border: 1px solid #dfe6ef;
+  border-radius: 8px;
+  background: #fff;
+  color: #101828;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.chaves-toolbar input {
+  flex: 1;
+  width: 100%;
+  padding: 0 14px;
+}
+
+.chaves-toolbar input::placeholder {
+  color: #8995aa;
+}
+
+.chaves-toolbar select {
+  width: 180px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.chaves-toolbar input:focus,
+.chaves-toolbar select:focus {
+  border-color: #326be8;
+  box-shadow: 0 0 0 3px rgb(50 107 232 / 12%);
+}
+
+.chaves-feedback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  background: #ecfdf3;
+  color: #065f46;
+  font-size: 14px;
+}
+
+.chaves-feedback button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.chaves-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dfe6ef;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.chaves-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.chaves-table thead {
+  background: #f8fafc;
+}
+
+.chaves-table th {
+  padding: 14px 18px;
+  border-bottom: 1px solid #dfe6ef;
+  color: #8995aa;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chaves-table td {
+  padding: 13px 18px;
+  border-bottom: 1px solid #edf1f6;
+  color: #101828;
+  vertical-align: middle;
+}
+
+.chaves-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.chaves-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.chaves-key-cell,
+.chaves-employee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.chaves-key-cell strong {
+  color: #101828;
+  font-size: 12px;
+}
+
+.chaves-key-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid #dfe6ef;
+  border-radius: 9px;
+  background: #f1f5f9;
+  font-size: 17px;
+}
+
+.chaves-locker {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: #eff6ff;
+  color: #2458ca;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chaves-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border: 1px solid #dfe6ef;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2458ca;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.chaves-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chaves-status-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.chaves-status.disponivel {
+  border-color: #a7f3d0;
+  background: #dcfce7;
+  color: #047857;
+}
+
+.chaves-status.aguardando {
+  border-color: #fcd34d;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.chaves-status.entregue {
+  border-color: #bfdbfe;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.chaves-action {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #dfe6ef;
+  border-radius: 8px;
+  background: #fff;
+  color: #344054;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.chaves-action:hover {
+  border-color: #98a2b3;
+  background: #f8fafc;
+}
+
+.chaves-action.primary {
+  border-color: #326be8;
+  background: #326be8;
+  color: #fff;
+}
+
+.chaves-action.primary:hover {
+  background: #2458ca;
+}
+
+.chaves-muted {
+  color: #8995aa;
+  font-size: 12px;
+}
+
+.chaves-empty {
+  padding: 32px !important;
+  color: #667085 !important;
+  text-align: center;
+}
+
+/* TEMA ESCURO */
+html.dark-theme .chaves-page,
+html.dark-theme .chaves-header h1,
+html.dark-theme .chaves-table td,
+html.dark-theme .chaves-key-cell strong {
+  color: #f8fafc;
+}
+
+html.dark-theme .chaves-header p,
+html.dark-theme .chaves-stat-card > span {
+  color: #cbd5e1;
+}
+
+html.dark-theme .chaves-header > span,
+html.dark-theme .chaves-muted {
+  color: #a9b8cc;
+}
+
+html.dark-theme .chaves-stat-card,
+html.dark-theme .chaves-toolbar,
+html.dark-theme .chaves-table-wrapper {
+  border-color: #334155;
+  background: #1e293b;
+}
+
+html.dark-theme .chaves-stat-card strong {
+  color: #fff;
+}
+
+html.dark-theme .chaves-toolbar input,
+html.dark-theme .chaves-toolbar select {
+  border-color: #475569;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+html.dark-theme .chaves-toolbar input::placeholder {
+  color: #a9b8cc;
+}
+
+html.dark-theme .chaves-table thead {
+  background: #172338;
+}
+
+html.dark-theme .chaves-table th {
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+html.dark-theme .chaves-table td {
+  border-color: #334155;
+}
+
+html.dark-theme .chaves-table tbody tr:hover {
+  background: #27364c;
+}
+
+html.dark-theme .chaves-key-icon {
+  border-color: #475569;
+  background: #27364c;
+}
+
+html.dark-theme .chaves-avatar {
+  border-color: #475569;
+  background: #263b59;
+  color: #bfdbfe;
+}
+
+html.dark-theme .chaves-action {
+  border-color: #475569;
+  background: #27364c;
+  color: #f8fafc;
+}
+
+html.dark-theme .chaves-action:hover {
+  background: #334155;
+}
+
+html.dark-theme .chaves-action.primary {
+  border-color: #326be8;
+  background: #326be8;
+  color: #fff;
+}
+
+html.dark-theme .chaves-feedback {
+  border-color: #166534;
+  background: #14352b;
+  color: #bbf7d0;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+  .chaves-stat-card {
+    padding: 16px;
+  }
+
+  .chaves-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .chaves-toolbar input {
+    flex-basis: 100%;
+  }
+
+  .chaves-toolbar select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .chaves-header h1 {
+    font-size: 27px;
+  }
+
+  .chaves-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .chaves-stat-card {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    align-items: center;
+    column-gap: 12px;
+    padding: 14px;
+  }
+
+  .chaves-stat-icon {
+    grid-row: span 2;
+    margin: 0;
+  }
+
+  .chaves-stat-card strong {
+    font-size: 23px;
+  }
+
+  .chaves-toolbar {
+    padding: 12px;
+  }
+
+  .chaves-table th,
+  .chaves-table td {
+    padding: 12px;
+  }
+}

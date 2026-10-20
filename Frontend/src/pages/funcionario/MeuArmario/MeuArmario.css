@@ -1,0 +1,560 @@
+
+/* ========================================
+   PÁGINA
+======================================== */
+
+.meu-armario-page {
+  width: 100%;
+  min-width: 0;
+  color: #101828;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.meu-armario-header {
+  margin-bottom: 26px;
+}
+
+.meu-armario-header > span {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #8491a7;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.meu-armario-header h1 {
+  margin: 0 0 8px;
+
+  color: #101828;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.meu-armario-header p {
+  margin: 0;
+
+  color: #526783;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   CARD PRINCIPAL
+======================================== */
+
+.meu-armario-card {
+  width: 100%;
+  min-width: 0;
+
+  padding: 22px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+.meu-armario-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 0;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.meu-armario-icone {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background-color: #eef4ff;
+  color: #326be8;
+}
+
+.meu-armario-identificacao {
+  min-width: 0;
+  flex: 1;
+}
+
+.meu-armario-identificacao > span {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #8491a7;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.meu-armario-identificacao h2 {
+  margin: 0 0 5px;
+
+  color: #101828;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.meu-armario-identificacao p {
+  margin: 0;
+
+  color: #526783;
+  font-size: 13px;
+}
+
+
+/* ========================================
+   STATUS DO ARMÁRIO
+======================================== */
+
+.meu-armario-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  padding: 7px 11px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.meu-armario-ponto {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.meu-armario-status.status-ocupado {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.meu-armario-status.status-livre {
+  background: #dcfce7;
+  border-color: #a7f3d0;
+  color: #047857;
+}
+
+.meu-armario-status.status-manutencao {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+
+/* ========================================
+   DETALHES
+======================================== */
+
+.meu-armario-detalhes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.meu-armario-detalhe {
+  min-width: 0;
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 9px;
+
+  background-color: #f1f5f9;
+}
+
+.meu-armario-detalhe-icone {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background-color: #ffffff;
+  color: #326be8;
+}
+
+.meu-armario-detalhe > div:last-child {
+  min-width: 0;
+}
+
+.meu-armario-detalhe > div:last-child > span {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #8491a7;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.meu-armario-detalhe strong {
+  display: block;
+
+  color: #101828;
+  font-size: 13px;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.meu-armario-detalhe strong.valor-azul {
+  color: #2458ca;
+}
+
+
+/* ========================================
+   INFORMAÇÃO DA CHAVE
+======================================== */
+
+.meu-armario-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  margin-top: 20px;
+  padding: 18px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+
+  background-color: #ffffff;
+}
+
+.meu-armario-info-icone {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background-color: #eef4ff;
+  color: #326be8;
+}
+
+.meu-armario-info-texto {
+  min-width: 0;
+}
+
+.meu-armario-info-texto h3 {
+  margin: 1px 0 7px;
+
+  color: #101828;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.meu-armario-info-texto p {
+  margin: 0;
+
+  color: #526783;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.meu-armario-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 22px;
+}
+
+.meu-armario-botao {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 10px 15px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.meu-armario-botao.primario {
+  background-color: #326be8;
+  color: #ffffff;
+}
+
+.meu-armario-botao.primario:hover {
+  background-color: #2458ca;
+}
+
+.meu-armario-botao.secundario {
+  border-color: #d0d5dd;
+  background-color: #ffffff;
+  color: #344054;
+}
+
+.meu-armario-botao.secundario:hover {
+  background-color: #f8fafc;
+}
+
+
+/*
+   SEM ARMÁRIO
+*/
+
+.meu-armario-vazio {
+  width: 100%;
+  max-width: 560px;
+
+  margin: 35px auto;
+  padding: 35px 28px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 14px;
+
+  background-color: #ffffff;
+
+  text-align: center;
+
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+.meu-armario-vazio-icone {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 20px;
+
+  border-radius: 16px;
+
+  background-color: #eef4ff;
+  color: #326be8;
+}
+
+.meu-armario-vazio h2 {
+  margin: 0 0 12px;
+
+  color: #101828;
+  font-size: 21px;
+}
+
+.meu-armario-vazio p {
+  margin: 0 0 22px;
+
+  color: #526783;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/*TEMA ESCURO */
+
+html.dark-theme .meu-armario-page {
+  color: #f8fafc;
+}
+
+html.dark-theme .meu-armario-header h1,
+html.dark-theme .meu-armario-identificacao h2,
+html.dark-theme .meu-armario-info-texto h3,
+html.dark-theme .meu-armario-detalhe strong,
+html.dark-theme .meu-armario-vazio h2 {
+  color: #f8fafc;
+}
+
+html.dark-theme .meu-armario-header > span,
+html.dark-theme .meu-armario-identificacao > span,
+html.dark-theme .meu-armario-detalhe > div:last-child > span {
+  color: #b8c5d9;
+}
+
+html.dark-theme .meu-armario-header p,
+html.dark-theme .meu-armario-identificacao p,
+html.dark-theme .meu-armario-info-texto p,
+html.dark-theme .meu-armario-vazio p {
+  color: #cbd5e1;
+}
+
+html.dark-theme .meu-armario-card,
+html.dark-theme .meu-armario-info,
+html.dark-theme .meu-armario-vazio {
+  border-color: #334155;
+  background-color: #1e293b;
+}
+
+html.dark-theme .meu-armario-card-header {
+  border-bottom-color: #334155;
+}
+
+html.dark-theme .meu-armario-icone,
+html.dark-theme .meu-armario-detalhe-icone,
+html.dark-theme .meu-armario-vazio-icone {
+  background-color: #263b59;
+  color: #93c5fd;
+}
+
+html.dark-theme .meu-armario-detalhe {
+  border-color: #334155;
+  background-color: #27364c;
+}
+
+html.dark-theme .meu-armario-detalhe strong.valor-azul {
+  color: #93c5fd;
+}
+
+html.dark-theme .meu-armario-info-icone {
+  background-color: #263b59;
+  color: #93c5fd;
+}
+
+html.dark-theme .meu-armario-status.status-ocupado {
+  border-color: #315784;
+  background-color: #1e3a5f;
+  color: #bfdbfe;
+}
+
+html.dark-theme .meu-armario-status.status-livre {
+  border-color: #166534;
+  background-color: #14352b;
+  color: #bbf7d0;
+}
+
+html.dark-theme .meu-armario-status.status-manutencao {
+  border-color: #7f1d1d;
+  background-color: #451a1a;
+  color: #fecaca;
+}
+
+html.dark-theme .meu-armario-botao.secundario {
+  border-color: #475569;
+  background-color: #27364c;
+  color: #f8fafc;
+}
+
+html.dark-theme .meu-armario-botao.secundario:hover {
+  background-color: #334155;
+}
+
+
+/*
+   RESPONSIVIDADE
+ */
+
+@media (max-width: 800px) {
+  .meu-armario-detalhes {
+    gap: 9px;
+  }
+
+  .meu-armario-card {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .meu-armario-header h1 {
+    font-size: 26px;
+  }
+
+  .meu-armario-card {
+    padding: 14px;
+  }
+
+  .meu-armario-card-header {
+    flex-wrap: wrap;
+  }
+
+  .meu-armario-identificacao {
+    flex: 1 1 calc(100% - 65px);
+  }
+
+  .meu-armario-status {
+    margin-left: auto;
+  }
+
+  .meu-armario-detalhes {
+    grid-template-columns: 1fr;
+  }
+
+  .meu-armario-info {
+    padding: 14px;
+  }
+
+  .meu-armario-acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .meu-armario-botao {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .meu-armario-vazio {
+    margin: 20px auto;
+    padding: 28px 18px;
+  }
+}
