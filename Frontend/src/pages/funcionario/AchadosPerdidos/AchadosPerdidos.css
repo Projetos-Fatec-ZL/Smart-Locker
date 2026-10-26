@@ -1,0 +1,853 @@
+
+/* ========================================
+   PÁGINA
+======================================== */
+
+.func-achados-page {
+  width: 100%;
+  min-width: 0;
+  color: #101828;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.func-achados-header {
+  margin-bottom: 26px;
+}
+
+.func-achados-header > span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8491a7;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.func-achados-header h1 {
+  margin: 0 0 8px;
+  color: #101828;
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+.func-achados-header p {
+  margin: 0;
+  color: #526783;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   CARDS DE RESUMO
+======================================== */
+
+.func-achados-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.func-achados-card {
+  min-width: 0;
+  padding: 19px;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+.func-achados-card-icone {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border-radius: 10px;
+}
+
+.func-achados-card-icone.total {
+  background: #eef4ff;
+  color: #326be8;
+}
+
+.func-achados-card-icone.encontrados {
+  background: #fff3d6;
+  color: #b7791f;
+}
+
+.func-achados-card-icone.entregues {
+  background: #dcfae6;
+  color: #079455;
+}
+
+.func-achados-card strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #101828;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.func-achados-card > span {
+  color: #526783;
+  font-size: 13px;
+}
+
+
+/* ========================================
+   PESQUISA E FILTROS
+======================================== */
+
+.func-achados-filtros {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04);
+}
+
+.func-achados-busca {
+  min-width: 0;
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 13px;
+  border: 1px solid #d0dbea;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #8491a7;
+}
+
+.func-achados-busca:focus-within {
+  border-color: #326be8;
+  box-shadow: 0 0 0 3px rgba(50, 107, 232, 0.1);
+}
+
+.func-achados-busca svg {
+  flex-shrink: 0;
+}
+
+.func-achados-busca input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #101828;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.func-achados-busca input::placeholder {
+  color: #8491a7;
+}
+
+.func-achados-filtros select {
+  width: 190px;
+  max-width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #d0dbea;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #344054;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.func-achados-filtros select:focus {
+  border-color: #326be8;
+}
+
+
+/* ========================================
+   AVISO AO FUNCIONÁRIO
+======================================== */
+
+.func-achados-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border: 1px solid #dbe6ff;
+  border-radius: 10px;
+  background: #f0f6ff;
+  color: #326be8;
+}
+
+.func-achados-aviso svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.func-achados-aviso p {
+  margin: 0;
+  color: #344e73;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   LISTA DE OBJETOS
+======================================== */
+
+.func-achados-lista {
+  min-width: 0;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04);
+}
+
+.func-achados-lista-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #e5eaf1;
+}
+
+.func-achados-lista-header h2 {
+  margin: 0 0 5px;
+  color: #101828;
+  font-size: 16px;
+}
+
+.func-achados-lista-header p {
+  margin: 0;
+  color: #8491a7;
+  font-size: 12px;
+}
+
+
+/* ========================================
+   TABELA RESPONSIVA
+======================================== */
+
+.func-achados-tabela-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.func-achados-tabela {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.func-achados-tabela thead {
+  background: #f8fafc;
+}
+
+.func-achados-tabela th {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e1e7f0;
+  color: #8491a7;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.func-achados-tabela td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #edf1f6;
+  color: #475467;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.func-achados-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.func-achados-tabela tbody tr:hover {
+  background: #f8fafc;
+}
+
+
+/* ========================================
+   IDENTIFICAÇÃO DO OBJETO
+======================================== */
+
+.func-achados-objeto {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.func-achados-objeto-icone {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce5f0;
+  border-radius: 9px;
+  background: #f1f5f9;
+  font-size: 18px;
+}
+
+.func-achados-objeto > div:last-child {
+  min-width: 0;
+}
+
+.func-achados-objeto strong {
+  display: block;
+  color: #101828;
+  font-size: 13px;
+}
+
+.func-achados-objeto span {
+  display: block;
+  margin-top: 4px;
+  color: #8491a7;
+  font-size: 11px;
+}
+
+
+/* ========================================
+   LOCAL E DATA
+======================================== */
+
+.func-achados-local {
+  display: inline-block;
+  padding: 5px 8px;
+  border: 1px solid #dce5f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #475467;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.func-achados-data {
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.func-achados-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.func-achados-status-ponto {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.func-achados-status.encontrado {
+  border-color: #f5cf62;
+  background: #fff4cc;
+  color: #a16207;
+}
+
+.func-achados-status.entregue {
+  border-color: #a7efc2;
+  background: #dcfae6;
+  color: #047857;
+}
+
+
+/* ========================================
+   BOTÃO DE DETALHES
+======================================== */
+
+.func-achados-btn-detalhes {
+  min-height: 36px;
+  padding: 8px 11px;
+  border: 1px solid #d0dbea;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #344054;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.func-achados-btn-detalhes:hover {
+  border-color: #326be8;
+  background: #f0f6ff;
+  color: #2458ca;
+}
+
+
+/* ========================================
+   ESTADO VAZIO
+======================================== */
+
+.func-achados-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 42px 20px;
+  text-align: center;
+  color: #8491a7;
+}
+
+.func-achados-vazio > svg {
+  margin-bottom: 14px;
+  color: #8491a7;
+}
+
+.func-achados-vazio h3 {
+  margin: 0 0 8px;
+  color: #101828;
+  font-size: 16px;
+}
+
+.func-achados-vazio p {
+  margin: 0 0 18px;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.func-achados-vazio button {
+  padding: 9px 13px;
+  border: 1px solid #d0dbea;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #326be8;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+/* ========================================
+   MODAL DE DETALHES
+======================================== */
+
+.func-achados-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  overflow-y: auto;
+
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.func-achados-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  padding: 30px;
+
+  border: 1px solid #e1e7f0;
+  border-radius: 14px;
+
+  background: #ffffff;
+  color: #101828;
+
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+}
+
+.func-achados-modal-fechar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #667085;
+
+  cursor: pointer;
+}
+
+.func-achados-modal-fechar:hover {
+  background: #f1f5f9;
+  color: #101828;
+}
+
+.func-achados-modal-icone {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+
+  background: #f1f5f9;
+  font-size: 25px;
+}
+
+.func-achados-modal h2 {
+  margin: 0 40px 6px 0;
+  color: #101828;
+  font-size: 23px;
+  line-height: 1.35;
+}
+
+.func-achados-modal-codigo {
+  margin: 0 0 24px;
+  color: #8491a7;
+  font-size: 13px;
+}
+
+.func-achados-modal-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.func-achados-modal-dados > div > span:first-child {
+  display: block;
+  margin-bottom: 7px;
+  color: #8491a7;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.func-achados-modal-dados p {
+  margin: 0;
+  color: #344054;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.func-achados-modal-local,
+.func-achados-modal-data {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.func-achados-modal-local svg,
+.func-achados-modal-data svg {
+  flex-shrink: 0;
+  color: #326be8;
+}
+
+.func-achados-modal-aviso {
+  margin-top: 22px;
+  padding: 13px;
+
+  border: 1px solid #dbe6ff;
+  border-radius: 9px;
+
+  background: #f0f6ff;
+  color: #344e73;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.func-achados-modal-botao {
+  width: 100%;
+  min-height: 44px;
+
+  margin-top: 24px;
+  padding: 11px 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #326be8;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.func-achados-modal-botao:hover {
+  background: #2458ca;
+}
+
+
+/* ========================================
+   TEMA ESCURO
+======================================== */
+
+html.dark-theme .func-achados-page,
+html.dark-theme .func-achados-header h1,
+html.dark-theme .func-achados-card strong,
+html.dark-theme .func-achados-lista-header h2,
+html.dark-theme .func-achados-objeto strong,
+html.dark-theme .func-achados-vazio h3,
+html.dark-theme .func-achados-modal h2 {
+  color: #f8fafc;
+}
+
+html.dark-theme .func-achados-header > span,
+html.dark-theme .func-achados-lista-header p,
+html.dark-theme .func-achados-objeto span {
+  color: #b8c5d9;
+}
+
+html.dark-theme .func-achados-header p,
+html.dark-theme .func-achados-card > span,
+html.dark-theme .func-achados-tabela td,
+html.dark-theme .func-achados-vazio p {
+  color: #cbd5e1;
+}
+
+html.dark-theme .func-achados-card,
+html.dark-theme .func-achados-filtros,
+html.dark-theme .func-achados-lista,
+html.dark-theme .func-achados-modal {
+  border-color: #334155;
+  background: #1e293b;
+}
+
+html.dark-theme .func-achados-busca {
+  border-color: #475569;
+  background: #0f172a;
+  color: #b8c5d9;
+}
+
+html.dark-theme .func-achados-busca input {
+  background: transparent;
+  color: #ffffff;
+}
+
+html.dark-theme .func-achados-busca input::placeholder {
+  color: #b8c5d9;
+}
+
+html.dark-theme .func-achados-filtros select {
+  border-color: #475569;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+html.dark-theme .func-achados-aviso {
+  border-color: #315784;
+  background: #172b49;
+}
+
+html.dark-theme .func-achados-aviso p {
+  color: #dbeafe;
+}
+
+html.dark-theme .func-achados-lista-header {
+  border-bottom-color: #334155;
+}
+
+html.dark-theme .func-achados-tabela thead {
+  background: #172338;
+}
+
+html.dark-theme .func-achados-tabela th {
+  border-color: #334155;
+  background: #172338;
+  color: #cbd5e1;
+}
+
+html.dark-theme .func-achados-tabela td {
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+html.dark-theme .func-achados-tabela tbody tr:hover {
+  background: #27364c;
+}
+
+html.dark-theme .func-achados-objeto-icone {
+  border-color: #475569;
+  background: #27364c;
+}
+
+html.dark-theme .func-achados-local {
+  border-color: #475569;
+  background: #263449;
+  color: #f8fafc;
+}
+
+html.dark-theme .func-achados-status.encontrado {
+  border-color: #854d0e;
+  background: #422b13;
+  color: #fde68a !important;
+}
+
+html.dark-theme .func-achados-status.entregue {
+  border-color: #166534;
+  background: #14352b;
+  color: #bbf7d0 !important;
+}
+
+html.dark-theme .func-achados-btn-detalhes,
+html.dark-theme .func-achados-vazio button {
+  border-color: #475569;
+  background: #27364c;
+  color: #f8fafc;
+}
+
+html.dark-theme .func-achados-btn-detalhes:hover {
+  border-color: #60a5fa;
+  background: #1e3a5f;
+}
+
+html.dark-theme .func-achados-modal-codigo,
+html.dark-theme .func-achados-modal-dados > div > span:first-child {
+  color: #b8c5d9;
+}
+
+html.dark-theme .func-achados-modal-dados p {
+  color: #f8fafc;
+}
+
+html.dark-theme .func-achados-modal-icone {
+  border-color: #475569;
+  background: #27364c;
+}
+
+html.dark-theme .func-achados-modal-fechar {
+  color: #cbd5e1;
+}
+
+html.dark-theme .func-achados-modal-fechar:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+html.dark-theme .func-achados-modal-aviso {
+  border-color: #315784;
+  background: #172b49;
+  color: #dbeafe;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1000px) {
+  .func-achados-cards {
+    gap: 10px;
+  }
+
+  .func-achados-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .func-achados-header h1 {
+    font-size: 27px;
+  }
+
+  .func-achados-filtros {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .func-achados-busca,
+  .func-achados-filtros select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .func-achados-modal {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .func-achados-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .func-achados-card {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    column-gap: 12px;
+    padding: 14px;
+  }
+
+  .func-achados-card-icone {
+    grid-row: span 2;
+    margin: 0;
+  }
+
+  .func-achados-card strong {
+    font-size: 23px;
+  }
+
+  .func-achados-lista-header {
+    padding: 15px;
+  }
+
+  .func-achados-modal-overlay {
+    padding: 12px;
+  }
+
+  .func-achados-modal {
+    padding: 22px 18px;
+    max-height: calc(100vh - 24px);
+  }
+}

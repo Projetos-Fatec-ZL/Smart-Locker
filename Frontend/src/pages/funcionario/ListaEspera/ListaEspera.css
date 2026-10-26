@@ -1,0 +1,542 @@
+
+/* ========================================
+   PÁGINA
+======================================== */
+
+.fila-funcionario-page {
+  width: 100%;
+  min-width: 0;
+  color: #101828;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.fila-funcionario-header {
+  margin-bottom: 26px;
+}
+
+.fila-funcionario-header > span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8491a7;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.fila-funcionario-header h1 {
+  margin: 0 0 8px;
+  color: #101828;
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+.fila-funcionario-header p {
+  margin: 0;
+  color: #526783;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   CARD PRINCIPAL
+======================================== */
+
+.fila-funcionario-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  padding: 24px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+.fila-funcionario-card-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 0;
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.fila-funcionario-icone {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+}
+
+.fila-funcionario-icone.sucesso {
+  background: #dcfae6;
+  color: #079455;
+}
+
+.fila-funcionario-icone.aguardando {
+  background: #fff3c7;
+  color: #b7791f;
+}
+
+.fila-funcionario-icone.neutro {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 20px;
+
+  background: #eef4ff;
+  color: #326be8;
+}
+
+.fila-funcionario-card-titulo {
+  min-width: 0;
+  flex: 1;
+}
+
+.fila-funcionario-card-titulo > span {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #8491a7;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.fila-funcionario-card-titulo h2 {
+  margin: 0 0 6px;
+
+  color: #101828;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.fila-funcionario-card-titulo p {
+  margin: 0;
+
+  color: #526783;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.fila-funcionario-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  padding: 7px 11px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fila-funcionario-status.associado {
+  border-color: #bfdbfe;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.fila-funcionario-status.pendente {
+  border-color: #fcd34d;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+
+/* ========================================
+   DETALHES
+======================================== */
+
+.fila-funcionario-detalhes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.fila-funcionario-detalhes > div {
+  min-width: 0;
+  min-height: 74px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 9px;
+
+  background: #f1f5f9;
+}
+
+.fila-funcionario-detalhes > div > span {
+  color: #8491a7;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.fila-funcionario-detalhes strong {
+  color: #101828;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.fila-funcionario-detalhes strong.fila-valor-azul {
+  color: #2458ca;
+}
+
+
+/* ========================================
+   DESTAQUE DA POSIÇÃO
+======================================== */
+
+.fila-posicao-destaque {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 20px;
+  padding: 20px;
+
+  border: 1px solid #c9dcff;
+  border-radius: 11px;
+
+  background: #eff6ff;
+}
+
+.fila-posicao-icone {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.fila-posicao-destaque > div:last-child > span {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #526783;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.fila-posicao-destaque strong {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #1d4ed8;
+  font-size: 27px;
+}
+
+.fila-posicao-destaque p {
+  margin: 0;
+
+  color: #526783;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   AVISOS
+======================================== */
+
+p.fila-funcionario-aviso,
+div.fila-funcionario-aviso {
+  margin: 20px 0 0;
+  padding: 14px 16px;
+
+  border: 1px solid #dce5f0;
+  border-radius: 9px;
+
+  background: #f8fafc;
+  color: #526783;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+div.fila-funcionario-aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.fila-funcionario-aviso svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #326be8;
+}
+
+.fila-funcionario-aviso p {
+  margin: 0;
+  color: inherit;
+}
+
+
+/* ========================================
+   BOTÃO
+======================================== */
+
+.fila-funcionario-botao {
+  min-height: 44px;
+  box-sizing: border-box;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin-top: 20px;
+  padding: 11px 16px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.fila-funcionario-botao.primario {
+  background: #326be8;
+  color: #ffffff;
+}
+
+.fila-funcionario-botao.primario:hover {
+  background: #2458ca;
+}
+
+
+/* ========================================
+   SEM SOLICITAÇÃO
+======================================== */
+
+.fila-sem-solicitacao {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 34px;
+
+  text-align: center;
+}
+
+.fila-sem-solicitacao h2 {
+  margin: 0 0 12px;
+
+  color: #101828;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+.fila-sem-solicitacao > p {
+  max-width: 500px;
+  margin: 0 auto;
+
+  color: #526783;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.fila-sem-solicitacao .fila-funcionario-aviso {
+  text-align: left;
+}
+
+
+/* ========================================
+   TEMA ESCURO
+======================================== */
+
+html.dark-theme .fila-funcionario-page {
+  color: #f8fafc;
+}
+
+html.dark-theme .fila-funcionario-header h1,
+html.dark-theme .fila-funcionario-card-titulo h2,
+html.dark-theme .fila-funcionario-detalhes strong,
+html.dark-theme .fila-sem-solicitacao h2 {
+  color: #f8fafc;
+}
+
+html.dark-theme .fila-funcionario-header > span,
+html.dark-theme .fila-funcionario-card-titulo > span,
+html.dark-theme .fila-funcionario-detalhes > div > span {
+  color: #b8c5d9;
+}
+
+html.dark-theme .fila-funcionario-header p,
+html.dark-theme .fila-funcionario-card-titulo p,
+html.dark-theme .fila-sem-solicitacao > p {
+  color: #cbd5e1;
+}
+
+html.dark-theme .fila-funcionario-card {
+  border-color: #334155;
+  background: #1e293b;
+}
+
+html.dark-theme .fila-funcionario-card-topo {
+  border-bottom-color: #334155;
+}
+
+html.dark-theme .fila-funcionario-icone.sucesso {
+  background: #14352b;
+  color: #bbf7d0;
+}
+
+html.dark-theme .fila-funcionario-icone.aguardando {
+  background: #422b13;
+  color: #fde68a;
+}
+
+html.dark-theme .fila-funcionario-icone.neutro {
+  background: #263b59;
+  color: #93c5fd;
+}
+
+html.dark-theme .fila-funcionario-detalhes > div {
+  border-color: #334155;
+  background: #27364c;
+}
+
+html.dark-theme .fila-funcionario-detalhes strong.fila-valor-azul {
+  color: #93c5fd;
+}
+
+html.dark-theme .fila-funcionario-status.associado {
+  border-color: #315784;
+  background: #1e3a5f;
+  color: #bfdbfe;
+}
+
+html.dark-theme .fila-funcionario-status.pendente {
+  border-color: #854d0e;
+  background: #422b13;
+  color: #fde68a;
+}
+
+html.dark-theme .fila-posicao-destaque {
+  border-color: #315784;
+  background: #172b49;
+}
+
+html.dark-theme .fila-posicao-icone {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+html.dark-theme .fila-posicao-destaque > div:last-child > span,
+html.dark-theme .fila-posicao-destaque p {
+  color: #cbd5e1;
+}
+
+html.dark-theme .fila-posicao-destaque strong {
+  color: #93c5fd;
+}
+
+html.dark-theme p.fila-funcionario-aviso,
+html.dark-theme div.fila-funcionario-aviso {
+  border-color: #334155;
+  background: #172338;
+  color: #cbd5e1;
+}
+
+html.dark-theme .fila-funcionario-aviso svg {
+  color: #93c5fd;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 800px) {
+  .fila-funcionario-card {
+    padding: 20px;
+  }
+
+  .fila-funcionario-detalhes {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fila-funcionario-header h1 {
+    font-size: 26px;
+  }
+
+  .fila-funcionario-card {
+    padding: 15px;
+  }
+
+  .fila-funcionario-card-topo {
+    flex-wrap: wrap;
+  }
+
+  .fila-funcionario-card-titulo {
+    flex: 1 1 calc(100% - 65px);
+  }
+
+  .fila-funcionario-status {
+    margin-left: auto;
+  }
+
+  .fila-funcionario-detalhes {
+    grid-template-columns: 1fr;
+  }
+
+  .fila-posicao-destaque {
+    padding: 15px;
+  }
+
+  .fila-sem-solicitacao {
+    padding: 26px 18px;
+  }
+
+  .fila-funcionario-botao {
+    width: 100%;
+  }
+}

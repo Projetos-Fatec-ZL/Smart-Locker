@@ -23,6 +23,8 @@ import Chaves from "./pages/admin/Chaves/Chaves";
 import FuncionarioLayout from "./layouts/FuncionarioLayout";
 import InicioFuncionario from "./pages/funcionario/Inicio/Inicio";
 import MeuArmario from "./pages/funcionario/MeuArmario/MeuArmario";
+import ListaEsperaFuncionario from "./pages/funcionario/ListaEspera/ListaEspera";
+import AchadosPerdidosFuncionario from "./pages/funcionario/AchadosPerdidos/AchadosPerdidos";
 
 function App() {
   return (
@@ -76,17 +78,8 @@ function App() {
             element={<Chaves />}
           />
         </Route>
-
-        {/* Área do funcionário */}
-        <Route
-          path="/funcionario"
-          element={<FuncionarioLayout />}
-        >
-          <Route
-            path="inicio"
-            element={<InicioFuncionario />}
-          />
-          <Route
+    {/* Área do funcionário */}
+<Route
   path="/funcionario"
   element={<FuncionarioLayout />}
 >
@@ -99,8 +92,16 @@ function App() {
     path="meu-armario"
     element={<MeuArmario />}
   />
+
+  <Route
+    path="lista-espera"
+    element={<ListaEsperaFuncionario />}
+  />
+   <Route
+    path="achados-perdidos"
+    element={<AchadosPerdidosFuncionario />}
+  />
 </Route>
-        </Route>
       </Routes>
     </BrowserRouter>
   );
