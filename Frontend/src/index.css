@@ -210,8 +210,8 @@ html.dark-theme table td {
   color: #ffffff;
 }
 
-html.dark-theme table td span,
-html.dark-theme table td strong {
+html.dark-theme table td span:not([class]),
+html.dark-theme table td strong:not([class]) {
   color: inherit;
 }
 
@@ -350,3 +350,4 @@ html.font-xlarge body {
 html.font-xxlarge body {
   zoom: 1.24;
 }
+

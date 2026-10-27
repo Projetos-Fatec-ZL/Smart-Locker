@@ -1,54 +1,367 @@
+/* 
+   CONTROLES GERAIS
+    */
+
 .accessibility-controls {
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
   gap: 8px;
-
   margin-bottom: 18px;
 }
 
 .accessibility-button {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2px;
 
   border: 1px solid #d0d5dd;
-  border-radius: 8px;
+  border-radius: 10px;
 
   background-color: #ffffff;
-
-  color: #344054;
+  color: #17345e;
 
   font-size: 16px;
   font-weight: 700;
 
   cursor: pointer;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 8%);
 
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
-
-  transition: 0.2s;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .accessibility-button:hover {
   background-color: #f4f7fb;
+  border-color: #93a4bd;
+}
+
+.accessibility-button:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
 }
 
 .accessibility-button.active {
   border-color: #2f68e9;
-
   background-color: #edf4ff;
-
   color: #2f68e9;
 }
 
 .font-button {
-  font-size: 14px;
+  font-size: 15px;
+  min-width: 42px;
+}
+
+/* 
+   BOTÃO E MENU DE APARÊNCIA
+*/
+
+.appearance-control {
+  position: relative;
+  display: inline-flex;
+}
+
+.appearance-button {
+  width: auto;
+  min-width: 42px;
+  padding: 0 8px;
+}
+
+.appearance-chevron {
+  opacity: 0.65;
+  transition: transform 0.2s ease;
+}
+
+.appearance-button[aria-expanded="true"] .appearance-chevron {
+  transform: rotate(180deg);
+}
+
+.appearance-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 1500;
+
+  width: 290px;
+  max-width: calc(100vw - 32px);
+  padding: 16px;
+
+  background: #ffffff;
+  color: #101b32;
+
+  border: 1px solid #dce4ef;
+  border-radius: 14px;
+
+  box-shadow: 0 12px 35px rgb(16 27 50 / 18%);
+
+  animation: appearance-menu-enter 0.15s ease-out;
+}
+
+.appearance-menu-title {
+  margin: 0 0 5px;
+  color: #101b32;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.appearance-menu-description {
+  margin: 0 0 14px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.appearance-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.appearance-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px;
+
+  text-align: left;
+  background: #ffffff;
+  color: #25344c;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.appearance-option:hover {
+  background: #f3f6fb;
+  border-color: #dce4ef;
+}
+
+.appearance-option:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 2px;
+}
+
+.appearance-option.is-selected {
+  background: #edf4ff;
+  border-color: #2f68e9;
+}
+
+.appearance-option-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #2f68e9;
+  background: #e9f0ff;
+  border-radius: 9px;
+}
+
+.appearance-option-text {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.appearance-option-title {
+  color: #101b32;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.appearance-option-description {
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.appearance-check {
+  flex-shrink: 0;
+  color: #2f68e9;
+}
+
+/* Menu adaptado ao tema escuro */
+html.dark-theme .appearance-menu {
+  background: #172238;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+html.dark-theme .appearance-menu-title {
+  color: #f8fafc;
+}
+
+html.dark-theme .appearance-menu-description {
+  color: #cbd5e1;
+}
+
+html.dark-theme .appearance-option {
+  background: #172238;
+  color: #f8fafc;
+}
+
+html.dark-theme .appearance-option:hover {
+  background: #24334c;
+  border-color: #52647f;
+}
+
+html.dark-theme .appearance-option.is-selected {
+  background: #243d68;
+  border-color: #76a7ff;
+}
+
+html.dark-theme .appearance-option-icon {
+  background: #243d68;
+  color: #a9caff;
+}
+
+html.dark-theme .appearance-option-title {
+  color: #f8fafc;
+}
+
+html.dark-theme .appearance-option-description {
+  color: #cbd5e1;
+}
+
+html.dark-theme .appearance-check {
+  color: #a9caff;
+}
+
+/* ========================================
+   ALTO CONTRASTE
+   ======================================== */
+
+html.alto-contraste {
+  color-scheme: dark;
+  background: #000000 !important;
+}
+
+html.alto-contraste body,
+html.alto-contraste body #root {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Contraste forte e consistente nas superfícies */
+html.alto-contraste body *:not(svg):not(path) {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Links ficam amarelos para serem identificados facilmente */
+html.alto-contraste body a,
+html.alto-contraste body a * {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+
+/* Botões com borda clara e contorno evidente */
+html.alto-contraste body button {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Estados ativos e opções selecionadas */
+html.alto-contraste body [aria-current="page"],
+html.alto-contraste body [aria-pressed="true"],
+html.alto-contraste body .active,
+html.alto-contraste body .ativo,
+html.alto-contraste body .appearance-option.is-selected {
+  color: #000000 !important;
+  background-color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+/* Ícones dos itens selecionados */
+html.alto-contraste body [aria-pressed="true"] svg {
+  color: #000000 !important;
+}
+
+/* Campos dos formulários */
+html.alto-contraste body input,
+html.alto-contraste body select,
+html.alto-contraste body textarea {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  caret-color: #ffff00;
+}
+
+html.alto-contraste body input::placeholder,
+html.alto-contraste body textarea::placeholder {
+  color: #dddddd !important;
+  opacity: 1;
+}
+
+/* Navegação por teclado */
+html.alto-contraste body :focus-visible {
+  outline: 3px solid #ffff00 !important;
+  outline-offset: 3px !important;
+}
+
+/* Menu de aparência em alto contraste */
+html.alto-contraste body .appearance-menu {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+html.alto-contraste body .appearance-option.is-selected {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border-color: #ffff00 !important;
+}
+
+html.alto-contraste body .appearance-option.is-selected * {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+html.alto-contraste body .appearance-option:not(.is-selected):hover {
+  outline: 2px solid #ffff00;
+  outline-offset: -2px;
+}
+
+/* ========================================
+   ANIMAÇÃO E RESPONSIVIDADE
+   ======================================== */
+
+@keyframes appearance-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -57,15 +370,34 @@
   }
 
   .accessibility-button {
-    width: 36px;
-    height: 36px;
+    min-height: 40px;
   }
 }
 
-/* Correção do posicionamento no layout do funcionário */
+@media (max-width: 400px) {
+  .appearance-menu {
+    position: fixed;
+    top: 68px;
+    right: 12px;
+    width: 290px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accessibility-button,
+  .appearance-option,
+  .appearance-chevron {
+    transition: none;
+  }
+
+  .appearance-menu {
+    animation: none;
+  }
+}
+
+/* Mantém o alinhamento existente do layout do funcionário */
 .funcionario-topbar .accessibility-controls {
   position: static !important;
-
   width: auto;
   min-height: 0;
 
