@@ -1,9 +1,7 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+// IMPORTAÇÃO NOVO COMPONENTE DE LIBRAS
+import VLibras from "./components/VLibras/VLibras";
 
 // Páginas públicas
 import Login from "./pages/login/Login";
@@ -29,79 +27,42 @@ import AchadosPerdidosFuncionario from "./pages/funcionario/AchadosPerdidos/Acha
 function App() {
   return (
     <BrowserRouter>
+      <VLibras />
+
       <Routes>
         {/* Páginas públicas */}
         <Route path="/" element={<Login />} />
 
-        <Route
-          path="/primeiro-acesso"
-          element={<PrimeiroAcesso />}
-        />
+        <Route path="/primeiro-acesso" element={<PrimeiroAcesso />} />
 
-        <Route
-          path="/esqueci-senha"
-          element={<EsqueciSenha />}
-        />
+        <Route path="/esqueci-senha" element={<EsqueciSenha />} />
 
         {/* Área administrativa */}
-        <Route
-          path="/admin"
-          element={<AdminLayout />}
-        >
-          <Route
-            path="dashboard"
-            element={<Dashboard />}
-          />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
 
-          <Route
-            path="armarios"
-            element={<Armarios />}
-          />
+          <Route path="armarios" element={<Armarios />} />
 
-          <Route
-            path="funcionarios"
-            element={<Funcionarios />}
-          />
+          <Route path="funcionarios" element={<Funcionarios />} />
 
-          <Route
-            path="lista-espera"
-            element={<ListaEspera />}
-          />
+          <Route path="lista-espera" element={<ListaEspera />} />
 
+          <Route path="achados-perdidos" element={<AchadosPerdidos />} />
+
+          <Route path="chaves" element={<Chaves />} />
+        </Route>
+        {/* Área do funcionário */}
+        <Route path="/funcionario" element={<FuncionarioLayout />}>
+          <Route path="inicio" element={<InicioFuncionario />} />
+
+          <Route path="meu-armario" element={<MeuArmario />} />
+
+          <Route path="lista-espera" element={<ListaEsperaFuncionario />} />
           <Route
             path="achados-perdidos"
-            element={<AchadosPerdidos />}
-          />
-
-          <Route
-            path="chaves"
-            element={<Chaves />}
+            element={<AchadosPerdidosFuncionario />}
           />
         </Route>
-    {/* Área do funcionário */}
-<Route
-  path="/funcionario"
-  element={<FuncionarioLayout />}
->
-  <Route
-    path="inicio"
-    element={<InicioFuncionario />}
-  />
-
-  <Route
-    path="meu-armario"
-    element={<MeuArmario />}
-  />
-
-  <Route
-    path="lista-espera"
-    element={<ListaEsperaFuncionario />}
-  />
-   <Route
-    path="achados-perdidos"
-    element={<AchadosPerdidosFuncionario />}
-  />
-</Route>
       </Routes>
     </BrowserRouter>
   );

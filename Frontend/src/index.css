@@ -15,11 +15,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
 
   background-color: #f8fafc;
   color: #172033;
@@ -58,7 +54,6 @@ html.dark-theme .admin-content {
   color: #ffffff;
 }
 
-
 /* =========================
    TEXTOS GERAIS
 ========================= */
@@ -73,7 +68,6 @@ html.dark-theme .admin-content label,
 html.dark-theme .admin-content strong {
   color: #ffffff;
 }
-
 
 /* textos secundários */
 
@@ -92,7 +86,6 @@ html.dark-theme .lista-espera-header p,
 html.dark-theme .achados-header p {
   color: #e2e8f0;
 }
-
 
 /* =========================
    CARDS
@@ -121,7 +114,6 @@ html.dark-theme .proximo-card p {
   color: #ffffff;
 }
 
-
 /* =========================
    DASHBOARD
 ========================= */
@@ -148,7 +140,6 @@ html.dark-theme .movimentacoes-header p {
   color: #ffffff;
 }
 
-
 /* =========================
    FILTROS
 ========================= */
@@ -161,7 +152,6 @@ html.dark-theme .achados-filtros {
 
   background-color: #1e293b;
 }
-
 
 /* =========================
    INPUTS
@@ -187,7 +177,6 @@ html.dark-theme select option {
 
   color: #ffffff;
 }
-
 
 /* =========================
    TABELAS
@@ -230,7 +219,6 @@ html.dark-theme table tbody tr:hover {
   background-color: #263449;
 }
 
-
 /* =========================
    BADGES
 ========================= */
@@ -246,7 +234,6 @@ html.dark-theme .fila-setor {
   color: #ffffff;
 }
 
-
 /* =========================
    AVATARES
 ========================= */
@@ -258,7 +245,6 @@ html.dark-theme .fila-avatar {
   color: #ffffff;
 }
 
-
 /* =========================
    PRÓXIMO DA FILA
 ========================= */
@@ -266,7 +252,6 @@ html.dark-theme .fila-avatar {
 html.dark-theme .proximo-fila-row {
   background-color: #172554;
 }
-
 
 /* =========================
    BOTÕES SECUNDÁRIOS
@@ -291,7 +276,6 @@ html.dark-theme .btn-achados-acao:hover,
 html.dark-theme .btn-dashboard-secondary:hover {
   background-color: #334155;
 }
-
 
 /* =========================
    MODAIS
@@ -327,7 +311,6 @@ html.dark-theme .modal-fechar {
   color: #ffffff;
 }
 
-
 /* =========================
    BOTÕES DE ACESSIBILIDADE
 ========================= */
@@ -352,7 +335,6 @@ html.dark-theme .accessibility-button.active {
   color: #ffffff;
 }
 
-
 /* ========================================
    FONTE MAIOR
 ======================================== */
@@ -360,14 +342,11 @@ html.dark-theme .accessibility-button.active {
 html.font-large body {
   zoom: 1.08;
 }
-/* CÓDIGO DOS ARMÁRIOS NO TEMA ESCURO */
 
-html.dark-theme .locker-code,
-html.dark-theme .armario-codigo,
-html.dark-theme .armario-chip {
-  background-color: #1e3a5f;
+html.font-xlarge body {
+  zoom: 1.16;
+}
 
-  color: #60a5fa !important;
-
-  border: 1px solid #315784;
+html.font-xxlarge body {
+  zoom: 1.24;
 }
