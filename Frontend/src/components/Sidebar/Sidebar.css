@@ -150,19 +150,62 @@
   color: #ffffff;
 }
 
+/* Botão do Menu Mobile (escondido em telas grandes) */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  background-color: #2f68e9;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  font-size: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay escuro para mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* Responsividade para telas menores */
 @media (max-width: 900px) {
-  .sidebar {
-    width: 210px;
-  }
-  @media (max-width: 1000px) {
   .sidebar {
     width: 210px;
   }
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    display: none;
+  .mobile-menu-btn {
+    display: block; /* Mostra o botão hambúrguer no celular/tablet */
   }
-}
+
+  .sidebar {
+    transform: translateX(
+      -100%
+    ); /* Esconde a sidebar para a esquerda por padrão */
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .sidebar.open {
+    transform: translateX(
+      0
+    ); /* Traz a sidebar para a tela quando a classe .open estiver ativa */
+  }
+
+  .sidebar-overlay {
+    display: block; /* Ativa o fundo escuro quando a sidebar abre no mobile */
+  }
 }

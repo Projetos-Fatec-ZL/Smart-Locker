@@ -1,0 +1,31 @@
+{
+  "name": "smart-locker",
+  "version": "1.0.0",
+  "description": "Aplicação web desenvolvida para facilitar o gerenciamento de armários, oferecendo controle de disponibilidade, ocupação, manutenção, usuários e lista de espera.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Projetos-Fatec-ZL/Smart-Locker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Projetos-Fatec-ZL/Smart-Locker/issues"
+  },
+  "homepage": "https://github.com/Projetos-Fatec-ZL/Smart-Locker#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
