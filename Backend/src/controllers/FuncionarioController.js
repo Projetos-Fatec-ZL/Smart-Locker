@@ -83,6 +83,17 @@ const buscarFuncionarioPorId = async (req, res) => {
 // atualiza os dados de um funcionario
 const atualizarFuncionario = async (req, res) => {
   try {
+    const id = String(req.params.id)
+      .replace(/^["']|["']$/g, "")
+      .trim();
+
+    // verifica se o id possui o formato correto
+    if (!/^[a-f\d]{24}$/i.test(id)) {
+      return res.status(400).json({
+        mensagem: "ID do funcionário inválido.",
+      });
+    }
+
     const { nome, cpf, setor, status, armario } = req.body;
 
     const dadosAtualizados = {};
@@ -94,7 +105,7 @@ const atualizarFuncionario = async (req, res) => {
     if (armario !== undefined) dadosAtualizados.armario = armario;
 
     const funcionario = await Funcionario.findByIdAndUpdate(
-      req.params.id,
+      id,
       dadosAtualizados,
       {
         new: true,
