@@ -1,5 +1,5 @@
 
-const AchadoPerdido = require("../config/models/AchadoPerdido");
+const AchadoPerdido = require("../models/AchadoPerdido");
 
 // cadastra um objeto encontrado
 const cadastrarAchado = async (req, res) => {
