@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+
+import { useEffect, useMemo, useState } from "react";
 import {
   Search,
   PackageSearch,
@@ -9,32 +10,70 @@ import {
   Info,
 } from "lucide-react";
 
-import { achadosPerdidosMock } from "../../admin/AchadosPerdidos/achadosPerdidosMock";
 import "./AchadosPerdidos.css";
 
 function AchadosPerdidosFuncionario() {
+  const [achados, setAchados] = useState([]);
   const [busca, setBusca] = useState("");
   const [filtroStatus, setFiltroStatus] = useState("todos");
   const [objetoSelecionado, setObjetoSelecionado] = useState(null);
 
-  const total = achadosPerdidosMock.length;
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState("");
 
-  const encontrados = achadosPerdidosMock.filter(
+  // consulta os objetos encontrados no backend
+  useEffect(() => {
+    async function carregarAchados() {
+      try {
+        const token = sessionStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("Sessão não encontrada. Faça login novamente.");
+        }
+
+        const resposta = await fetch(
+          "http://localhost:5000/api/funcionario/achados-perdidos",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+          throw new Error(
+            dados.mensagem || "Erro ao consultar objetos encontrados."
+          );
+        }
+
+        setAchados(Array.isArray(dados.achados) ? dados.achados : []);
+      } catch (error) {
+        setErro(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    carregarAchados();
+  }, []);
+
+  const total = achados.length;
+
+  const encontrados = achados.filter(
     (objeto) => objeto.status === "encontrado"
-  ).length;
-
-  const entregues = achadosPerdidosMock.filter(
-    (objeto) => objeto.status === "entregue"
   ).length;
 
   const objetosFiltrados = useMemo(() => {
     const termo = busca.trim().toLowerCase();
 
-    return achadosPerdidosMock.filter((objeto) => {
+    return achados.filter((objeto) => {
       const correspondeBusca =
-        objeto.objeto.toLowerCase().includes(termo) ||
-        objeto.descricao.toLowerCase().includes(termo) ||
-        objeto.local.toLowerCase().includes(termo);
+        (objeto.objeto || "").toLowerCase().includes(termo) ||
+        (objeto.descricao || "").toLowerCase().includes(termo) ||
+        (objeto.local || "").toLowerCase().includes(termo) ||
+        (objeto.codigo || "").toLowerCase().includes(termo);
 
       const correspondeStatus =
         filtroStatus === "todos" ||
@@ -42,19 +81,28 @@ function AchadosPerdidosFuncionario() {
 
       return correspondeBusca && correspondeStatus;
     });
-  }, [busca, filtroStatus]);
+  }, [achados, busca, filtroStatus]);
 
   function formatarData(data) {
     if (!data) return "Não informada";
 
+    const dataFormatada = String(data).split("T")[0];
+
     return new Date(
-      `${data}T12:00:00`
+      `${dataFormatada}T12:00:00`
     ).toLocaleDateString("pt-BR");
+  }
+
+  if (loading) {
+    return (
+      <section className="func-achados-page">
+        <p>Carregando objetos encontrados...</p>
+      </section>
+    );
   }
 
   return (
     <section className="func-achados-page">
-
       {/* CABEÇALHO */}
 
       <header className="func-achados-header">
@@ -68,18 +116,25 @@ function AchadosPerdidosFuncionario() {
         </p>
       </header>
 
+      {/* MENSAGEM DE ERRO */}
+
+      {erro && (
+        <div className="func-achados-aviso">
+          <Info size={19} />
+          <p>{erro}</p>
+        </div>
+      )}
 
       {/* CARDS DE RESUMO */}
 
       <div className="func-achados-cards">
-
         <article className="func-achados-card">
           <div className="func-achados-card-icone total">
             <PackageSearch size={21} />
           </div>
 
           <strong>{total}</strong>
-          <span>Total de objetos</span>
+          <span>Total de objetos disponíveis</span>
         </article>
 
         <article className="func-achados-card">
@@ -96,17 +151,14 @@ function AchadosPerdidosFuncionario() {
             <CheckCircle2 size={21} />
           </div>
 
-          <strong>{entregues}</strong>
-          <span>Já entregues</span>
+          <strong>—</strong>
+          <span>Entregues não exibidos</span>
         </article>
-
       </div>
-
 
       {/* PESQUISA E FILTRO */}
 
       <section className="func-achados-filtros">
-
         <div className="func-achados-busca">
           <Search size={18} />
 
@@ -124,13 +176,10 @@ function AchadosPerdidosFuncionario() {
           value={filtroStatus}
           onChange={(event) => setFiltroStatus(event.target.value)}
         >
-          <option value="todos">Todos os status</option>
+          <option value="todos">Todos os objetos</option>
           <option value="encontrado">Encontrados</option>
-          <option value="entregue">Entregues</option>
         </select>
-
       </section>
-
 
       {/* INFORMAÇÃO */}
 
@@ -144,11 +193,9 @@ function AchadosPerdidosFuncionario() {
         </p>
       </div>
 
-
       {/* LISTA DE OBJETOS */}
 
       <section className="func-achados-lista">
-
         <div className="func-achados-lista-header">
           <div>
             <h2>Objetos registrados</h2>
@@ -162,16 +209,16 @@ function AchadosPerdidosFuncionario() {
           </div>
         </div>
 
-
         {objetosFiltrados.length === 0 ? (
-
           <div className="func-achados-vazio">
             <PackageSearch size={36} />
 
             <h3>Nenhum objeto encontrado</h3>
 
             <p>
-              Tente pesquisar por outro nome ou alterar o filtro.
+              {erro
+                ? "Não foi possível carregar os objetos."
+                : "Tente pesquisar por outro nome ou alterar o filtro."}
             </p>
 
             <button
@@ -184,12 +231,9 @@ function AchadosPerdidosFuncionario() {
               Limpar filtros
             </button>
           </div>
-
         ) : (
-
           <div className="func-achados-tabela-container">
             <table className="func-achados-tabela">
-
               <thead>
                 <tr>
                   <th>Objeto</th>
@@ -203,9 +247,7 @@ function AchadosPerdidosFuncionario() {
 
               <tbody>
                 {objetosFiltrados.map((objeto) => (
-
-                  <tr key={objeto.id}>
-
+                  <tr key={objeto._id}>
                     <td>
                       <div className="func-achados-objeto">
                         <div className="func-achados-objeto-icone">
@@ -254,24 +296,17 @@ function AchadosPerdidosFuncionario() {
                         Ver detalhes
                       </button>
                     </td>
-
                   </tr>
-
                 ))}
               </tbody>
-
             </table>
           </div>
-
         )}
-
       </section>
-
 
       {/* MODAL DE DETALHES */}
 
       {objetoSelecionado && (
-
         <div
           className="func-achados-modal-overlay"
           onMouseDown={(event) => {
@@ -280,14 +315,12 @@ function AchadosPerdidosFuncionario() {
             }
           }}
         >
-
           <section
             className="func-achados-modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby="func-achados-modal-titulo"
           >
-
             <button
               type="button"
               className="func-achados-modal-fechar"
@@ -310,7 +343,6 @@ function AchadosPerdidosFuncionario() {
             </p>
 
             <div className="func-achados-modal-dados">
-
               <div>
                 <span>DESCRIÇÃO</span>
                 <p>{objetoSelecionado.descricao}</p>
@@ -349,7 +381,6 @@ function AchadosPerdidosFuncionario() {
                   </span>
                 </p>
               </div>
-
             </div>
 
             {objetoSelecionado.status === "encontrado" && (
@@ -366,12 +397,9 @@ function AchadosPerdidosFuncionario() {
             >
               Fechar
             </button>
-
           </section>
         </div>
-
       )}
-
     </section>
   );
 }

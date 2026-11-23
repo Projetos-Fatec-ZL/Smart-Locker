@@ -1,26 +1,76 @@
 
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LockKeyhole, PackageSearch, ArrowRight } from "lucide-react";
-import { armariosMock } from "../../../data/mockData";
+import {
+  LockKeyhole,
+  PackageSearch,
+  ArrowRight,
+} from "lucide-react";
+
 import "./Inicio.css";
 
 function Inicio() {
-  // Dados temporários do funcionário logado.
-  // Depois vamos obter essas informações pelo backend.
-  const nomeFuncionario = "Ana Souza";
-  const setorFuncionario = "Padaria";
+  const [funcionario, setFuncionario] = useState(null);
+  const [armario, setArmario] = useState(null);
+  const [chave, setChave] = useState(null);
 
-  const armario = armariosMock.find(
-    (item) => item.funcionario === nomeFuncionario
-  );
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState("");
+
+  // consulta os dados do funcionario logado
+  useEffect(() => {
+    async function carregarPerfil() {
+      try {
+        const token = sessionStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("Sessão não encontrada. Faça login novamente.");
+        }
+
+        const resposta = await fetch(
+          "http://localhost:5000/api/funcionario/meu-perfil",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+          throw new Error(
+            dados.mensagem || "Erro ao carregar os dados do funcionário."
+          );
+        }
+
+        setFuncionario(dados.funcionario);
+        setArmario(dados.funcionario.armario || null);
+        setChave(dados.chave || null);
+      } catch (error) {
+        setErro(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    carregarPerfil();
+  }, []);
+
+  const nomeFuncionario = funcionario?.nome || "Funcionário";
+  const setorFuncionario = funcionario?.setor || "Setor não informado";
 
   const temArmario = Boolean(armario);
 
-  function formatarVestiario(vestiario) {
-    if (!vestiario) return "Não informado";
+  function formatarVestiario(tipo) {
+    if (!tipo) return "Não informado";
 
-    return vestiario.charAt(0).toUpperCase() +
-      vestiario.slice(1);
+    const tipos = {
+      feminino: "Feminino",
+      masculino: "Masculino",
+    };
+
+    return tipos[tipo] || tipo;
   }
 
   function formatarStatus(status) {
@@ -30,7 +80,7 @@ function Inicio() {
       manutencao: "Em manutenção",
       disponivel: "Disponível",
       entregue: "Entregue",
-      aguardando_retirada: "Aguardando retirada",
+      extraviada: "Extraviada",
       devolvida: "Devolvida",
     };
 
@@ -39,8 +89,18 @@ function Inicio() {
 
   function classeStatusChave(status) {
     if (status === "entregue") return "entregue";
-    if (status === "aguardando_retirada") return "aguardando";
+    if (status === "extraviada") return "extraviada";
+    if (status === "devolvida") return "devolvida";
+
     return "disponivel";
+  }
+
+  if (loading) {
+    return (
+      <section className="inicio-funcionario">
+        <p>Carregando suas informações...</p>
+      </section>
+    );
   }
 
   return (
@@ -60,6 +120,11 @@ function Inicio() {
         <p>{setorFuncionario}</p>
       </header>
 
+      {erro && (
+        <div className="inicio-erro">
+          {erro}
+        </div>
+      )}
 
       {/* SITUAÇÃO ATUAL */}
 
@@ -78,13 +143,13 @@ function Inicio() {
           <div className="inicio-identificacao">
             <h3>
               {temArmario
-                ? `Armário ${armario.numero}`
+                ? `Armário ${armario.codigo}`
                 : "Você ainda não possui um armário"}
             </h3>
 
             <p>
               {temArmario
-                ? `Vestiário ${formatarVestiario(armario.vestiario)}`
+                ? `Vestiário ${formatarVestiario(armario.tipo)}`
                 : "Consulte a lista de espera para acompanhar sua solicitação."}
             </p>
           </div>
@@ -97,7 +162,6 @@ function Inicio() {
 
         </div>
 
-
         {temArmario ? (
 
           <div className="inicio-detalhes">
@@ -106,39 +170,36 @@ function Inicio() {
               <span>ARMÁRIO</span>
 
               <strong className="inicio-valor-azul">
-                {armario.numero}
+                {armario.codigo}
               </strong>
             </div>
-
 
             <div className="inicio-detalhe">
               <span>VESTIÁRIO</span>
 
               <strong>
-                {formatarVestiario(armario.vestiario)}
+                {formatarVestiario(armario.tipo)}
               </strong>
             </div>
-
 
             <div className="inicio-detalhe">
               <span>CHAVE</span>
 
               <strong className="inicio-valor-azul">
-                {armario.chave || `CH-${armario.numero}`}
+                {chave?.codigo || "Não vinculada"}
               </strong>
             </div>
-
 
             <div className="inicio-detalhe">
               <span>STATUS DA CHAVE</span>
 
               <div>
                 <span
-                  className={`inicio-status-chave ${classeStatusChave(armario.chaveStatus)}`}
+                  className={`inicio-status-chave ${classeStatusChave(chave?.status)}`}
                 >
                   <span className="inicio-status-ponto" />
 
-                  {formatarStatus(armario.chaveStatus)}
+                  {formatarStatus(chave?.status)}
                 </span>
               </div>
             </div>
@@ -166,7 +227,6 @@ function Inicio() {
 
       </section>
 
-
       {/* ATALHOS */}
 
       <div className="inicio-atalhos">
@@ -192,7 +252,6 @@ function Inicio() {
             size={18}
           />
         </Link>
-
 
         <Link
           to="/funcionario/achados-perdidos"

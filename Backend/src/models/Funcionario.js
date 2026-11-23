@@ -18,17 +18,16 @@ const funcionarioSchema = new mongoose.Schema(
     },
 
     senha: {
-  type: String,
-  required: true,
-  select: false,
-
+      type: String,
+      required: false,
+      default: null,
+      select: false,
     },
 
-   perfil: {
-  type: String,
-  enum: ["admin", "funcionario"],
-  default: "funcionario",
-  
+    perfil: {
+      type: String,
+      enum: ["admin", "funcionario"],
+      default: "funcionario",
     },
 
     setor: {
@@ -48,14 +47,30 @@ const funcionarioSchema = new mongoose.Schema(
       ref: "Armario",
       default: null,
     },
+
+    // recuperação de senha
+    codigoRecuperacaoHash: {
+      type: String,
+      default: null,
+      select: false,
+    },
+
+    codigoRecuperacaoExpiraEm: {
+      type: Date,
+      default: null,
+      select: false,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+// criptografa a senha antes de salvar
 funcionarioSchema.pre("save", async function () {
-  if (!this.isModified("senha")) return;
+  if (!this.isModified("senha") || !this.senha) return;
 
   this.senha = await bcrypt.hash(this.senha, 10);
 });
+
 module.exports = mongoose.model("Funcionario", funcionarioSchema);

@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
@@ -7,6 +8,8 @@ function Login() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   function formatarCpf(valor) {
     const numeros = valor.replace(/\D/g, "").slice(0, 11);
@@ -21,43 +24,65 @@ function Login() {
     setCpf(formatarCpf(event.target.value));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-
     setErro("");
 
-    if (!cpf || !senha) {
+    const cpfLimpo = cpf.replace(/\D/g, "");
+
+    if (!cpfLimpo || !senha) {
       setErro("Preencha o CPF e a senha.");
       return;
     }
 
     setLoading(true);
 
-    /*
-      FUTURAMENTE:
-      Aqui será feita a chamada para o backend.
-
-      Exemplo:
-
-      POST /api/auth/login
-
-      enviando:
-      {
-        cpf,
-        senha
-      }
-    */
-
-    setTimeout(() => {
-      console.log("CPF:", cpf);
-      console.log("Senha:", senha);
-
-      setLoading(false);
-
-      alert(
-        "Frontend funcionando! A autenticação será conectada ao backend depois."
+    try {
+      const resposta = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            cpf: cpfLimpo,
+            senha,
+          }),
+        }
       );
-    }, 600);
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(dados.mensagem || "Erro ao realizar login.");
+      }
+
+      if (!dados.token || !dados.usuario) {
+        throw new Error("Resposta de autenticação inválida.");
+      }
+
+      sessionStorage.setItem("token", dados.token);
+      sessionStorage.setItem("usuario", JSON.stringify(dados.usuario));
+
+      if (dados.usuario.perfil === "admin") {
+        navigate("/admin/dashboard");
+      } else if (dados.usuario.perfil === "funcionario") {
+        navigate("/funcionario/inicio");
+      } else {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("usuario");
+        throw new Error("Perfil de usuário não reconhecido.");
+      }
+    } catch (error) {
+      setErro(
+        error.message === "Failed to fetch"
+          ? "Não foi possível conectar ao servidor. Verifique se o backend está ligado."
+          : error.message
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -108,9 +133,7 @@ function Login() {
 
           <form onSubmit={handleSubmit}>
             <div className="login-form-group">
-              <label htmlFor="cpf">
-                CPF
-              </label>
+              <label htmlFor="cpf">CPF</label>
 
               <input
                 id="cpf"
@@ -125,18 +148,14 @@ function Login() {
             </div>
 
             <div className="login-form-group">
-              <label htmlFor="senha">
-                Senha
-              </label>
+              <label htmlFor="senha">Senha</label>
 
               <input
                 id="senha"
                 type="password"
                 placeholder="••••••••"
                 value={senha}
-                onChange={(event) =>
-                  setSenha(event.target.value)
-                }
+                onChange={(event) => setSenha(event.target.value)}
                 autoComplete="current-password"
               />
             </div>
@@ -155,10 +174,9 @@ function Login() {
               Primeiro acesso
             </Link>
 
-          <Link to="/esqueci-senha">
-            Esqueci minha senha
-          </Link>
-          
+            <Link to="/esqueci-senha">
+              Esqueci minha senha
+            </Link>
           </div>
         </div>
       </section>

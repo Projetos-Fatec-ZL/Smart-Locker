@@ -17,11 +17,11 @@ const chaveSchema = new mongoose.Schema(
       required: true,
     },
 
-    status: {
-      type: String,
-      enum: ["disponivel", "emprestada", "extraviada", "manutencao"],
-      default: "disponivel",
-    },
+   status: {
+  type: String,
+  enum: ["disponivel", "entregue", "extraviada", "devolvida"],
+  default: "disponivel",
+},
   },
   {
     timestamps: true,

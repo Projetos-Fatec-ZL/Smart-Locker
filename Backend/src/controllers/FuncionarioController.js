@@ -1,14 +1,15 @@
 
 const Funcionario = require("../models/Funcionario");
+const Chave = require("../models/Chave");
 
 // cadastra um funcionario
 const cadastrarFuncionario = async (req, res) => {
   try {
-    const { nome, cpf, senha, setor, status, armario } = req.body;
+    const { nome, cpf, setor, status, armario } = req.body;
 
-    if (!senha || senha.length < 6) {
+    if (!nome || !cpf || !setor) {
       return res.status(400).json({
-        mensagem: "A senha deve ter pelo menos 6 caracteres.",
+        mensagem: "Informe nome, CPF e setor.",
       });
     }
 
@@ -23,9 +24,8 @@ const cadastrarFuncionario = async (req, res) => {
     const funcionario = await Funcionario.create({
       nome,
       cpf,
-      senha,
       setor,
-      status,
+      status: status || "ativo",
       armario: armario || null,
     });
 
@@ -37,13 +37,14 @@ const cadastrarFuncionario = async (req, res) => {
       funcionario: funcionarioSeguro,
     });
   } catch (error) {
+    console.error("ERRO AO CADASTRAR FUNCIONÁRIO:", error);
+
     return res.status(500).json({
       mensagem: "Erro ao cadastrar funcionário.",
       erro: error.message,
     });
   }
 };
-
 
 // lista os funcionarios
 const listarFuncionarios = async (req, res) => {
@@ -63,6 +64,8 @@ const listarFuncionarios = async (req, res) => {
 
     return res.status(200).json(funcionarios);
   } catch (error) {
+    console.error("ERRO AO LISTAR FUNCIONÁRIOS:", error);
+
     return res.status(500).json({
       mensagem: "Erro ao listar funcionários.",
       erro: error.message,
@@ -84,6 +87,8 @@ const buscarFuncionarioPorId = async (req, res) => {
 
     return res.status(200).json(funcionario);
   } catch (error) {
+    console.error("ERRO AO BUSCAR FUNCIONÁRIO:", error);
+
     return res.status(500).json({
       mensagem: "Erro ao buscar funcionário.",
       erro: error.message,
@@ -98,7 +103,6 @@ const atualizarFuncionario = async (req, res) => {
       .replace(/^["']|["']$/g, "")
       .trim();
 
-    // verifica se o id possui o formato correto
     if (!/^[a-f\d]{24}$/i.test(id)) {
       return res.status(400).json({
         mensagem: "ID do funcionário inválido.",
@@ -135,6 +139,8 @@ const atualizarFuncionario = async (req, res) => {
       funcionario,
     });
   } catch (error) {
+    console.error("ERRO AO ATUALIZAR FUNCIONÁRIO:", error);
+
     if (error.code === 11000) {
       return res.status(409).json({
         mensagem: "Já existe um funcionário cadastrado com este CPF.",
@@ -167,11 +173,21 @@ const consultarMeuPerfil = async (req, res) => {
       });
     }
 
+    // busca a chave vinculada ao armario do funcionario
+    const chave = funcionario.armario
+      ? await Chave.findOne({
+          armario: funcionario.armario._id,
+        }).select("codigo status")
+      : null;
+
     return res.status(200).json({
       mensagem: "Perfil consultado com sucesso!",
       funcionario,
+      chave,
     });
   } catch (error) {
+    console.error("ERRO AO CONSULTAR PERFIL:", error);
+
     return res.status(500).json({
       mensagem: "Erro ao consultar perfil.",
     });
@@ -193,6 +209,8 @@ const excluirFuncionario = async (req, res) => {
       mensagem: "Funcionário excluído com sucesso!",
     });
   } catch (error) {
+    console.error("ERRO AO EXCLUIR FUNCIONÁRIO:", error);
+
     return res.status(500).json({
       mensagem: "Erro ao excluir funcionário.",
       erro: error.message,

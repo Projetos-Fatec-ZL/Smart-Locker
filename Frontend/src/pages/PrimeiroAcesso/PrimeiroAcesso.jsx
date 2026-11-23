@@ -1,6 +1,9 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./PrimeiroAcesso.css";
+
+const API_URL = "http://localhost:5000/api";
 
 function PrimeiroAcesso() {
   const [cpf, setCpf] = useState("");
@@ -8,6 +11,7 @@ function PrimeiroAcesso() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
   function formatarCpf(valor) {
     const numeros = valor.replace(/\D/g, "").slice(0, 11);
@@ -22,7 +26,7 @@ function PrimeiroAcesso() {
     setCpf(formatarCpf(event.target.value));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     setErro("");
@@ -33,13 +37,13 @@ function PrimeiroAcesso() {
       return;
     }
 
-    if (cpf.length !== 14) {
+    if (cpf.replace(/\D/g, "").length !== 11) {
       setErro("Informe um CPF válido.");
       return;
     }
 
-    if (senha.length < 4) {
-      setErro("A senha deve ter pelo menos 4 caracteres.");
+    if (senha.length < 6) {
+      setErro("A senha deve ter pelo menos 6 caracteres.");
       return;
     }
 
@@ -48,19 +52,46 @@ function PrimeiroAcesso() {
       return;
     }
 
-    /*
-      FUTURAMENTE:
-      aqui o backend vai verificar se o CPF
-      foi previamente cadastrado pelo administrador.
-    */
+    try {
+      setCarregando(true);
 
-    setSucesso("Acesso criado com sucesso!");
+      const resposta = await fetch(
+        `${API_URL}/auth/primeiro-acesso`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            cpf: cpf.replace(/\D/g, ""),
+            senha,
+            confirmarSenha,
+          }),
+        }
+      );
+
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(
+          dados.mensagem || "Não foi possível criar seu acesso."
+        );
+      }
+
+      setSucesso(dados.mensagem);
+      setCpf("");
+      setSenha("");
+      setConfirmarSenha("");
+    } catch (error) {
+      setErro(error.message || "Erro ao conectar com o servidor.");
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
     <main className="primeiro-acesso-page">
       <section className="primeiro-acesso-container">
-
         <h1>Primeiro acesso</h1>
 
         <p className="primeiro-acesso-subtitulo">
@@ -68,7 +99,6 @@ function PrimeiroAcesso() {
         </p>
 
         <form onSubmit={handleSubmit}>
-
           <div className="primeiro-acesso-form-group">
             <label htmlFor="cpf">CPF</label>
 
@@ -79,6 +109,7 @@ function PrimeiroAcesso() {
               placeholder="000.000.000-00"
               value={cpf}
               onChange={handleCpfChange}
+              disabled={carregando}
             />
           </div>
 
@@ -91,6 +122,7 @@ function PrimeiroAcesso() {
               placeholder="••••••••"
               value={senha}
               onChange={(event) => setSenha(event.target.value)}
+              disabled={carregando}
             />
           </div>
 
@@ -107,17 +139,18 @@ function PrimeiroAcesso() {
               onChange={(event) =>
                 setConfirmarSenha(event.target.value)
               }
+              disabled={carregando}
             />
           </div>
 
           {erro && (
-            <div className="primeiro-acesso-erro">
+            <div className="primeiro-acesso-erro" role="alert">
               {erro}
             </div>
           )}
 
           {sucesso && (
-            <div className="primeiro-acesso-sucesso">
+            <div className="primeiro-acesso-sucesso" role="status">
               {sucesso}
             </div>
           )}
@@ -125,8 +158,9 @@ function PrimeiroAcesso() {
           <button
             type="submit"
             className="primeiro-acesso-button"
+            disabled={carregando}
           >
-            Criar acesso
+            {carregando ? "Criando acesso..." : "Criar acesso"}
           </button>
         </form>
 
@@ -139,13 +173,9 @@ function PrimeiroAcesso() {
           </p>
         </div>
 
-        <Link
-          to="/"
-          className="primeiro-acesso-voltar"
-        >
+        <Link to="/" className="primeiro-acesso-voltar">
           ← Voltar para o login
         </Link>
-
       </section>
     </main>
   );

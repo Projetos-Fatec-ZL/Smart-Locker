@@ -1,71 +1,184 @@
+
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-
-import {
-  armariosMock,
-  funcionariosMock,
-  listaEsperaMock,
-} from "../../../data/mockData";
 
 function Dashboard() {
   const navigate = useNavigate();
 
-  const totalArmarios = armariosMock.length;
+  const [armarios, setArmarios] = useState([]);
+  const [funcionarios, setFuncionarios] = useState([]);
+  const [listaEspera, setListaEspera] = useState([]);
+  const [administrador, setAdministrador] = useState("Administrador");
 
-  const livres = armariosMock.filter(
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState("");
+
+  // carrega os dados reais do dashboard
+  useEffect(() => {
+    async function carregarDashboard() {
+      try {
+        const token = sessionStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("Sessão não encontrada. Faça login novamente.");
+        }
+
+        const usuarioSalvo = sessionStorage.getItem("usuario");
+
+        if (usuarioSalvo) {
+          const usuario = JSON.parse(usuarioSalvo);
+          setAdministrador(usuario.nome || "Administrador");
+        }
+
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        const [respostaArmarios, respostaFuncionarios, respostaFila] =
+          await Promise.all([
+            fetch("http://localhost:5000/api/armarios", { headers }),
+            fetch("http://localhost:5000/api/funcionarios", { headers }),
+            fetch("http://localhost:5000/api/lista-espera", { headers }),
+          ]);
+
+        const dadosArmarios = await respostaArmarios.json();
+        const dadosFuncionarios = await respostaFuncionarios.json();
+        const dadosFila = await respostaFila.json();
+
+        if (!respostaArmarios.ok) {
+          throw new Error(
+            dadosArmarios.mensagem || "Erro ao carregar armários."
+          );
+        }
+
+        if (!respostaFuncionarios.ok) {
+          throw new Error(
+            dadosFuncionarios.mensagem || "Erro ao carregar funcionários."
+          );
+        }
+
+        if (!respostaFila.ok) {
+          throw new Error(
+            dadosFila.mensagem || "Erro ao carregar lista de espera."
+          );
+        }
+
+        // aceita listas retornadas diretamente ou dentro de objetos
+        const obterLista = (dados, chaves) => {
+          if (Array.isArray(dados)) return dados;
+
+          for (const chave of chaves) {
+            if (Array.isArray(dados[chave])) {
+              return dados[chave];
+            }
+          }
+
+          return [];
+        };
+
+        setArmarios(
+          obterLista(dadosArmarios, ["armarios", "lista", "registros"])
+        );
+
+        setFuncionarios(
+          obterLista(dadosFuncionarios, [
+            "funcionarios",
+            "lista",
+            "registros",
+          ])
+        );
+
+        setListaEspera(
+          obterLista(dadosFila, ["lista", "registros"])
+        );
+      } catch (error) {
+        setErro(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    carregarDashboard();
+  }, []);
+
+  // indicadores
+  const totalArmarios = armarios.length;
+
+  const livres = armarios.filter(
     (armario) => armario.status === "livre"
   );
 
-  const ocupados = armariosMock.filter(
+  const ocupados = armarios.filter(
     (armario) => armario.status === "ocupado"
   );
 
-  const manutencao = armariosMock.filter(
+  const manutencao = armarios.filter(
     (armario) => armario.status === "manutencao"
   );
 
-  const funcionariosAtivos = funcionariosMock.filter(
+  const funcionariosAtivos = funcionarios.filter(
     (funcionario) => funcionario.status === "ativo"
   );
 
-  const fila = listaEsperaMock.filter(
+  const fila = listaEspera.filter(
     (item) => item.status === "aguardando"
   );
 
-  const movimentacoes = [...armariosMock]
-    .sort(
-      (a, b) =>
-        new Date(b.updatedDate) -
-        new Date(a.updatedDate)
-    )
+  // encontra o funcionário associado ao armário
+  function encontrarFuncionario(armario) {
+    return funcionarios.find((funcionario) => {
+      const referencia = funcionario.armario;
+
+      if (!referencia) return false;
+
+      const idArmario =
+        typeof referencia === "object"
+          ? referencia._id
+          : referencia;
+
+      return String(idArmario) === String(armario._id);
+    });
+  }
+
+  // últimas atualizações dos armários
+  const movimentacoes = [...armarios]
+    .sort((a, b) => {
+      const dataA = new Date(a.updatedAt || a.createdAt || 0);
+      const dataB = new Date(b.updatedAt || b.createdAt || 0);
+
+      return dataB - dataA;
+    })
     .slice(0, 6);
 
   function calcularPorcentagem(valor) {
-    if (totalArmarios === 0) {
-      return 0;
-    }
+    if (totalArmarios === 0) return 0;
 
-    return Math.round(
-      (valor / totalArmarios) * 100
-    );
+    return Math.round((valor / totalArmarios) * 100);
   }
 
   function formatarData(data) {
-    return new Date(
-      `${data}T12:00:00`
-    ).toLocaleDateString("pt-BR");
+    if (!data) return "Não informada";
+
+    return new Date(data).toLocaleDateString("pt-BR");
   }
 
   function nomeStatus(status) {
-    if (status === "livre") {
-      return "Livre";
-    }
+    const statusFormatados = {
+      livre: "Livre",
+      ocupado: "Ocupado",
+      manutencao: "Em manutenção",
+    };
 
-    if (status === "ocupado") {
-      return "Ocupado";
-    }
+    return statusFormatados[status] || status || "Não informado";
+  }
 
-    return "Em manutenção";
+  if (loading) {
+    return (
+      <section className="dashboard-page">
+        <p>Carregando informações do Dashboard...</p>
+      </section>
+    );
   }
 
   return (
@@ -80,31 +193,34 @@ function Dashboard() {
           </span>
 
           <h1>
-            Olá, Administrador! 👋
+            Olá, {administrador}! 👋
           </h1>
         </div>
 
         <div className="dashboard-actions">
           <button
             className="btn-dashboard-primary"
-            onClick={() =>
-              navigate("/admin/funcionarios")
-            }
+            onClick={() => navigate("/admin/funcionarios")}
           >
             + Cadastrar funcionário
           </button>
 
           <button
             className="btn-dashboard-secondary"
-            onClick={() =>
-              navigate("/admin/armarios")
-            }
+            onClick={() => navigate("/admin/armarios")}
           >
             Ver armários
           </button>
         </div>
       </header>
 
+      {/* ERRO */}
+
+      {erro && (
+        <p className="dashboard-erro">
+          {erro}
+        </p>
+      )}
 
       {/* CARDS */}
 
@@ -119,7 +235,6 @@ function Dashboard() {
           <span>Total de armários</span>
         </article>
 
-
         <article className="dashboard-card">
           <div className="dashboard-icon icon-livres">
             ✓
@@ -128,7 +243,6 @@ function Dashboard() {
           <strong>{livres.length}</strong>
           <span>Livres</span>
         </article>
-
 
         <article className="dashboard-card">
           <div className="dashboard-icon icon-ocupados">
@@ -139,7 +253,6 @@ function Dashboard() {
           <span>Ocupados</span>
         </article>
 
-
         <article className="dashboard-card">
           <div className="dashboard-icon icon-manutencao">
             🔧
@@ -149,19 +262,14 @@ function Dashboard() {
           <span>Em manutenção</span>
         </article>
 
-
         <article className="dashboard-card">
           <div className="dashboard-icon icon-funcionarios">
             👥
           </div>
 
-          <strong>
-            {funcionariosAtivos.length}
-          </strong>
-
+          <strong>{funcionariosAtivos.length}</strong>
           <span>Funcionários</span>
         </article>
-
 
         <article className="dashboard-card">
           <div className="dashboard-icon icon-fila">
@@ -173,7 +281,6 @@ function Dashboard() {
         </article>
 
       </div>
-
 
       {/* DISTRIBUIÇÃO */}
 
@@ -188,9 +295,7 @@ function Dashboard() {
           </p>
         </div>
 
-
         <div className="distribution-item">
-
           <div className="distribution-top">
             <div>
               <span className="status-dot livre"></span>
@@ -199,12 +304,7 @@ function Dashboard() {
 
             <strong>
               {livres.length}
-              <small>
-                {calcularPorcentagem(
-                  livres.length
-                )}
-                %
-              </small>
+              <small>{calcularPorcentagem(livres.length)}%</small>
             </strong>
           </div>
 
@@ -212,18 +312,13 @@ function Dashboard() {
             <div
               className="distribution-progress progress-livre"
               style={{
-                width: `${calcularPorcentagem(
-                  livres.length
-                )}%`,
+                width: `${calcularPorcentagem(livres.length)}%`,
               }}
             />
           </div>
-
         </div>
 
-
         <div className="distribution-item">
-
           <div className="distribution-top">
             <div>
               <span className="status-dot ocupado"></span>
@@ -232,12 +327,7 @@ function Dashboard() {
 
             <strong>
               {ocupados.length}
-              <small>
-                {calcularPorcentagem(
-                  ocupados.length
-                )}
-                %
-              </small>
+              <small>{calcularPorcentagem(ocupados.length)}%</small>
             </strong>
           </div>
 
@@ -245,18 +335,13 @@ function Dashboard() {
             <div
               className="distribution-progress progress-ocupado"
               style={{
-                width: `${calcularPorcentagem(
-                  ocupados.length
-                )}%`,
+                width: `${calcularPorcentagem(ocupados.length)}%`,
               }}
             />
           </div>
-
         </div>
 
-
         <div className="distribution-item">
-
           <div className="distribution-top">
             <div>
               <span className="status-dot manutencao"></span>
@@ -265,12 +350,7 @@ function Dashboard() {
 
             <strong>
               {manutencao.length}
-              <small>
-                {calcularPorcentagem(
-                  manutencao.length
-                )}
-                %
-              </small>
+              <small>{calcularPorcentagem(manutencao.length)}%</small>
             </strong>
           </div>
 
@@ -278,24 +358,17 @@ function Dashboard() {
             <div
               className="distribution-progress progress-manutencao"
               style={{
-                width: `${calcularPorcentagem(
-                  manutencao.length
-                )}%`,
+                width: `${calcularPorcentagem(manutencao.length)}%`,
               }}
             />
           </div>
-
         </div>
-
       </section>
-
 
       {/* MOVIMENTAÇÕES */}
 
       <section className="dashboard-section">
-
         <div className="movimentacoes-header">
-
           <div className="section-title">
             <h2>
               Últimas Movimentações
@@ -308,20 +381,14 @@ function Dashboard() {
 
           <button
             className="ver-todas"
-            onClick={() =>
-              navigate("/admin/armarios")
-            }
+            onClick={() => navigate("/admin/armarios")}
           >
             Ver todas →
           </button>
-
         </div>
 
-
         <div className="dashboard-table-wrapper">
-
           <table className="dashboard-table">
-
             <thead>
               <tr>
                 <th>Armário</th>
@@ -333,53 +400,52 @@ function Dashboard() {
             </thead>
 
             <tbody>
+              {movimentacoes.length === 0 ? (
+                <tr>
+                  <td colSpan="5">
+                    Nenhum armário cadastrado.
+                  </td>
+                </tr>
+              ) : (
+                movimentacoes.map((armario) => {
+                  const funcionario = encontrarFuncionario(armario);
 
-              {movimentacoes.map(
-                (armario) => (
-                  <tr key={armario.id}>
+                  return (
+                    <tr key={armario._id}>
+                      <td>
+                        <span className="locker-code">
+                          {armario.codigo}
+                        </span>
+                      </td>
 
-                    <td>
-                      <span className="locker-code">
-                        {armario.numero}
-                      </span>
-                    </td>
+                      <td>
+                        {funcionario?.setor || "—"}
+                      </td>
 
-                    <td>
-                      {armario.setor || "—"}
-                    </td>
+                      <td>
+                        {funcionario?.nome || "—"}
+                      </td>
 
-                    <td>
-                      {armario.funcionario ||
-                        "—"}
-                    </td>
+                      <td>
+                        <span
+                          className={`status-pill ${armario.status}`}
+                        >
+                          ● {nomeStatus(armario.status)}
+                        </span>
+                      </td>
 
-                    <td>
-                      <span
-                        className={`status-pill ${armario.status}`}
-                      >
-                        ●{" "}
-                        {nomeStatus(
-                          armario.status
+                      <td>
+                        {formatarData(
+                          armario.updatedAt || armario.createdAt
                         )}
-                      </span>
-                    </td>
-
-                    <td>
-                      {formatarData(
-                        armario.updatedDate
-                      )}
-                    </td>
-
-                  </tr>
-                )
+                      </td>
+                    </tr>
+                  );
+                })
               )}
-
             </tbody>
-
           </table>
-
         </div>
-
       </section>
 
     </section>

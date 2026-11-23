@@ -10,6 +10,8 @@ import {
 
 import "./EsqueciSenha.css";
 
+const API_URL = "http://localhost:5000/api";
+
 function EsqueciSenha() {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
@@ -20,6 +22,7 @@ function EsqueciSenha() {
 
   const [erro, setErro] = useState("");
   const [concluido, setConcluido] = useState(false);
+  const [carregando, setCarregando] = useState(false);
 
   function formatarCpf(valor) {
     const numeros = valor.replace(/\D/g, "").slice(0, 11);
@@ -44,78 +47,24 @@ function EsqueciSenha() {
     setErro("");
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     setErro("");
 
     const cpfDigitado = cpf.replace(/\D/g, "");
 
-    // Validação básica do CPF informado.
     if (cpfDigitado.length !== 11) {
       setErro("Informe um CPF com 11 dígitos.");
       return;
     }
 
-    // Recupera o código temporário gerado pelo administrador.
-    const dadosSalvos = sessionStorage.getItem(
-      "smartlocker-recovery"
-    );
-
-    if (!dadosSalvos) {
-      setErro(
-        "Não encontramos um código de recuperação. Procure o administrador."
-      );
+    if (codigo.length !== 6) {
+      setErro("Informe o código de recuperação com 6 dígitos.");
       return;
     }
 
-    let recuperacao;
-
-    try {
-      recuperacao = JSON.parse(dadosSalvos);
-    } catch {
-      setErro(
-        "Não foi possível verificar o código. Solicite outro ao administrador."
-      );
-      return;
-    }
-
-    // Confere se o código pertence ao CPF informado.
-    if (recuperacao.cpf !== cpfDigitado) {
-      setErro(
-        "O código não corresponde ao CPF informado."
-      );
-      return;
-    }
-
-    // Verifica se o código já foi utilizado.
-    if (recuperacao.usado) {
-      setErro(
-        "Este código já foi utilizado. Solicite um novo ao administrador."
-      );
-      return;
-    }
-
-    // Verifica se o código expirou.
-    if (Date.now() >= recuperacao.expiraEm) {
-      setErro(
-        "O código expirou. Solicite um novo ao administrador."
-      );
-      return;
-    }
-
-    // Confere o código digitado.
-    if (
-      codigo.trim() !== String(recuperacao.codigo)
-    ) {
-      setErro("Código de recuperação inválido.");
-      return;
-    }
-
-    // Verifica a nova senha.
     if (novaSenha.length < 8) {
-      setErro(
-        "A nova senha deve ter pelo menos 8 caracteres."
-      );
+      setErro("A nova senha deve ter pelo menos 8 caracteres.");
       return;
     }
 
@@ -124,28 +73,46 @@ function EsqueciSenha() {
       return;
     }
 
-    /*
-      SIMULAÇÃO DO FRONTEND:
-      Marca o código como utilizado.
+    try {
+      setCarregando(true);
 
-      A nova senha ainda não é salva na conta.
-      Essa operação será implementada no Spring Boot.
-    */
-    sessionStorage.setItem(
-      "smartlocker-recovery",
-      JSON.stringify({
-        ...recuperacao,
-        usado: true,
-      })
-    );
+      const resposta = await fetch(
+        `${API_URL}/auth/redefinir-senha`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            cpf: cpfDigitado,
+            codigo,
+            novaSenha,
+            confirmarSenha,
+          }),
+        }
+      );
 
-    setConcluido(true);
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(
+          dados.mensagem || "Não foi possível redefinir sua senha."
+        );
+      }
+
+      setConcluido(true);
+    } catch (error) {
+      setErro(
+        error.message || "Erro ao conectar com o servidor."
+      );
+    } finally {
+      setCarregando(false);
+    }
   }
 
   return (
     <main className="recuperacao-page">
       <section className="recuperacao-card">
-
         {!concluido ? (
           <>
             <div className="recuperacao-icone">
@@ -210,13 +177,12 @@ function EsqueciSenha() {
                       placeholder="000.000.000-00"
                       value={cpf}
                       onChange={(event) => {
-                        setCpf(
-                          formatarCpf(event.target.value)
-                        );
+                        setCpf(formatarCpf(event.target.value));
                         setErro("");
                       }}
                       maxLength={14}
                       required
+                      disabled={carregando}
                     />
                   </div>
 
@@ -243,6 +209,7 @@ function EsqueciSenha() {
                       }}
                       maxLength={6}
                       required
+                      disabled={carregando}
                     />
                   </div>
 
@@ -263,6 +230,7 @@ function EsqueciSenha() {
                         setErro("");
                       }}
                       required
+                      disabled={carregando}
                     />
                   </div>
 
@@ -283,6 +251,7 @@ function EsqueciSenha() {
                         setErro("");
                       }}
                       required
+                      disabled={carregando}
                     />
                   </div>
 
@@ -298,8 +267,9 @@ function EsqueciSenha() {
                   <button
                     type="submit"
                     className="recuperacao-botao"
+                    disabled={carregando}
                   >
-                    Confirmar
+                    {carregando ? "Validando..." : "Confirmar"}
                   </button>
                 </form>
 
@@ -307,6 +277,7 @@ function EsqueciSenha() {
                   type="button"
                   className="recuperacao-voltar"
                   onClick={voltarParaOrientacoes}
+                  disabled={carregando}
                 >
                   <ArrowLeft size={16} />
                   Voltar
@@ -327,12 +298,12 @@ function EsqueciSenha() {
               <CheckCircle2 size={32} />
             </div>
 
-            <h1>Validação concluída!</h1>
+            <h1>Senha redefinida!</h1>
 
             <p>
-              O código foi validado e não poderá ser usado
-              novamente. A alteração efetiva da senha ainda
-              precisa ser conectada ao backend.
+              Sua senha foi alterada com sucesso.
+              Agora você já pode acessar o Smart Locker
+              utilizando sua nova senha.
             </p>
 
             <Link to="/" className="recuperacao-botao">
@@ -340,7 +311,6 @@ function EsqueciSenha() {
             </Link>
           </div>
         )}
-
       </section>
     </main>
   );
