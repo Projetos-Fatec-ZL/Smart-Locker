@@ -10,6 +10,12 @@ const {
   excluirChave,
 } = require("../controllers/ChaveController");
 
+const autenticar = require("../middlewares/authMiddleware");
+const autorizarPerfil = require("../middlewares/perfilMiddleware");
+
+// protege todas as rotas para administradores
+router.use(autenticar, autorizarPerfil("admin"));
+
 // cadastra uma chave
 router.post("/", cadastrarChave);
 
@@ -26,3 +32,4 @@ router.put("/:id", atualizarChave);
 router.delete("/:id", excluirChave);
 
 module.exports = router;
+

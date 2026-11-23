@@ -10,6 +10,12 @@ const {
   excluirAchado,
 } = require("../controllers/AchadoPerdidoController");
 
+const autenticar = require("../middlewares/authMiddleware");
+const autorizarPerfil = require("../middlewares/perfilMiddleware");
+
+// protege todas as rotas para administradores
+router.use(autenticar, autorizarPerfil("admin"));
+
 // cadastra um objeto encontrado
 router.post("/", cadastrarAchado);
 

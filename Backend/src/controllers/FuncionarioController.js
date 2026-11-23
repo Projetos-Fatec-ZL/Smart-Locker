@@ -4,7 +4,13 @@ const Funcionario = require("../models/Funcionario");
 // cadastra um funcionario
 const cadastrarFuncionario = async (req, res) => {
   try {
-    const { nome, cpf, setor, status, armario } = req.body;
+    const { nome, cpf, senha, setor, status, armario } = req.body;
+
+    if (!senha || senha.length < 6) {
+      return res.status(400).json({
+        mensagem: "A senha deve ter pelo menos 6 caracteres.",
+      });
+    }
 
     const funcionarioExistente = await Funcionario.findOne({ cpf });
 
@@ -17,14 +23,18 @@ const cadastrarFuncionario = async (req, res) => {
     const funcionario = await Funcionario.create({
       nome,
       cpf,
+      senha,
       setor,
       status,
       armario: armario || null,
     });
 
+    const funcionarioSeguro = funcionario.toObject();
+    delete funcionarioSeguro.senha;
+
     return res.status(201).json({
       mensagem: "Funcionário cadastrado com sucesso!",
-      funcionario,
+      funcionario: funcionarioSeguro,
     });
   } catch (error) {
     return res.status(500).json({
@@ -33,6 +43,7 @@ const cadastrarFuncionario = async (req, res) => {
     });
   }
 };
+
 
 // lista os funcionarios
 const listarFuncionarios = async (req, res) => {
@@ -137,6 +148,36 @@ const atualizarFuncionario = async (req, res) => {
   }
 };
 
+// consulta o perfil do funcionario autenticado
+const consultarMeuPerfil = async (req, res) => {
+  try {
+    const funcionario = await Funcionario.findById(req.usuario.id)
+      .select("-senha")
+      .populate("armario", "codigo tipo status");
+
+    if (!funcionario) {
+      return res.status(404).json({
+        mensagem: "Funcionário não encontrado.",
+      });
+    }
+
+    if (funcionario.status !== "ativo") {
+      return res.status(403).json({
+        mensagem: "Funcionário inativo. Acesso não permitido.",
+      });
+    }
+
+    return res.status(200).json({
+      mensagem: "Perfil consultado com sucesso!",
+      funcionario,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensagem: "Erro ao consultar perfil.",
+    });
+  }
+};
+
 // exclui um funcionario
 const excluirFuncionario = async (req, res) => {
   try {
@@ -165,4 +206,5 @@ module.exports = {
   buscarFuncionarioPorId,
   atualizarFuncionario,
   excluirFuncionario,
+  consultarMeuPerfil,
 };

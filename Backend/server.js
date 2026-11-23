@@ -9,6 +9,10 @@ const armarioRoutes = require("./src/routes/armarioRoutes");
 const chaveRoutes = require("./src/routes/chaveRoutes");
 const listaEsperaRoutes = require("./src/routes/listaEsperaRoutes");
 const achadoPerdidoRoutes = require("./src/routes/achadoPerdidoRoutes");
+const authRoutes = require("./src/routes/authRoutes");
+const funcionarioListaEsperaRoutes = require("./src/routes/funcionarioListaEsperaRoutes");
+const perfilFuncionarioRoutes = require("./src/routes/perfilFuncionarioRoutes");
+const funcionarioAchadosRoutes = require("./src/routes/funcionarioAchadosRoutes");
 
 // Carrega as variáveis do arquivo .env
 dotenv.config();
@@ -29,6 +33,10 @@ app.use("/api/armarios", armarioRoutes);
 app.use("/api/chaves", chaveRoutes);
 app.use("/api/lista-espera", listaEsperaRoutes);
 app.use("/api/achados-perdidos", achadoPerdidoRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/funcionario/minha-lista-espera", funcionarioListaEsperaRoutes);
+app.use("/api/funcionario/meu-perfil", perfilFuncionarioRoutes);
+app.use("/api/funcionario/achados-perdidos", funcionarioAchadosRoutes);
 
 
 // Rota de teste

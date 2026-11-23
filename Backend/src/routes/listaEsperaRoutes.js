@@ -10,6 +10,12 @@ const {
   excluirRegistro,
 } = require("../controllers/ListaEsperaController");
 
+const autenticar = require("../middlewares/authMiddleware");
+const autorizarPerfil = require("../middlewares/perfilMiddleware");
+
+// protege todas as rotas para administradores
+router.use(autenticar, autorizarPerfil("admin"));
+
 // adiciona funcionario na lista de espera
 router.post("/", cadastrarNaLista);
 

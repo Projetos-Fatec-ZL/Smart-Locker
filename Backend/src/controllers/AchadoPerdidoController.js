@@ -157,10 +157,30 @@ const excluirAchado = async (req, res) => {
   }
 };
 
+// lista objetos encontrados para funcionarios
+const listarAchadosDisponiveis = async (req, res) => {
+  try {
+    const achados = await AchadoPerdido.find({
+      status: "encontrado",
+    }).sort({ data: -1 });
+
+    return res.status(200).json({
+      mensagem: "Objetos encontrados listados com sucesso!",
+      achados,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensagem: "Erro ao listar objetos encontrados.",
+    });
+  }
+};
+
+
 module.exports = {
   cadastrarAchado,
   listarAchados,
   buscarAchadoPorId,
   atualizarAchado,
   excluirAchado,
+  listarAchadosDisponiveis,
 };

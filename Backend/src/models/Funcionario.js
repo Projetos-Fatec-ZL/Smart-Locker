@@ -1,5 +1,6 @@
 
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const funcionarioSchema = new mongoose.Schema(
   {
@@ -14,6 +15,20 @@ const funcionarioSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
+    },
+
+    senha: {
+  type: String,
+  required: true,
+  select: false,
+
+    },
+
+   perfil: {
+  type: String,
+  enum: ["admin", "funcionario"],
+  default: "funcionario",
+  
     },
 
     setor: {
@@ -38,5 +53,9 @@ const funcionarioSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+funcionarioSchema.pre("save", async function () {
+  if (!this.isModified("senha")) return;
 
+  this.senha = await bcrypt.hash(this.senha, 10);
+});
 module.exports = mongoose.model("Funcionario", funcionarioSchema);

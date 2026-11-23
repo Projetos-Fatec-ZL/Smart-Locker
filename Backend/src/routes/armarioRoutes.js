@@ -10,6 +10,12 @@ const {
   excluirArmario,
 } = require("../controllers/ArmarioController");
 
+const autenticar = require("../middlewares/authMiddleware");
+const autorizarPerfil = require("../middlewares/perfilMiddleware");
+
+// protege todas as rotas para administradores
+router.use(autenticar, autorizarPerfil("admin"));
+
 // cadastra um armario
 router.post("/", cadastrarArmario);
 

@@ -148,6 +148,119 @@ const atualizarRegistro = async (req, res) => {
   }
 };
 
+/* funcionario entra na propria lista de espera */
+const entrarNaMinhaLista = async (req, res) => {
+  try {
+    const funcionarioId = req.usuario.id;
+
+    const funcionario = await Funcionario.findOne({
+      _id: funcionarioId,
+      status: "ativo",
+    });
+
+    if (!funcionario) {
+      return res.status(404).json({
+        mensagem: "Funcionário não encontrado ou inativo.",
+      });
+    }
+
+    const registroExistente = await ListaEspera.findOne({
+      funcionario: funcionarioId,
+      status: "aguardando",
+    });
+
+    if (registroExistente) {
+      return res.status(409).json({
+        mensagem: "Você já está na lista de espera.",
+      });
+    }
+
+    const registro = await ListaEspera.create({
+      funcionario: funcionarioId,
+    });
+
+    const registroCompleto = await ListaEspera.findById(registro._id)
+      .populate("funcionario", "nome setor")
+      .populate("armario", "codigo tipo status");
+
+    return res.status(201).json({
+      mensagem: "Você entrou na lista de espera!",
+      registro: registroCompleto,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensagem: "Erro ao entrar na lista de espera.",
+    });
+  }
+};
+
+/* funcionario consulta sua propria lista */
+const consultarMinhaLista = async (req, res) => {
+  try {
+    const funcionarioId = req.usuario.id;
+
+    const registros = await ListaEspera.find({
+      funcionario: funcionarioId,
+    })
+      .populate("armario", "codigo tipo status")
+      .sort({ createdAt: 1 });
+
+    const fila = await ListaEspera.find({
+      status: "aguardando",
+    }).sort({ createdAt: 1, _id: 1 });
+
+    const resultado = registros.map((registro) => {
+      const posicao = fila.findIndex(
+        (item) => item._id.toString() === registro._id.toString()
+      );
+
+      return {
+        ...registro.toObject(),
+        posicao: posicao === -1 ? null : posicao + 1,
+      };
+    });
+
+    return res.status(200).json(resultado);
+  } catch (error) {
+    return res.status(500).json({
+      mensagem: "Erro ao consultar sua lista de espera.",
+    });
+  }
+};
+
+/* funcionario cancela sua propria solicitacao */
+const cancelarMinhaLista = async (req, res) => {
+  try {
+    const registro = await ListaEspera.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        funcionario: req.usuario.id,
+        status: "aguardando",
+      },
+      {
+        status: "cancelada",
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!registro) {
+      return res.status(404).json({
+        mensagem: "Solicitação não encontrada ou não pode ser cancelada.",
+      });
+    }
+
+    return res.status(200).json({
+      mensagem: "Solicitação cancelada com sucesso!",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensagem: "Erro ao cancelar solicitação.",
+    });
+  }
+};
 // remove um registro da lista de espera
 const excluirRegistro = async (req, res) => {
   try {
@@ -176,4 +289,7 @@ module.exports = {
   buscarRegistroPorId,
   atualizarRegistro,
   excluirRegistro,
+  entrarNaMinhaLista,
+  consultarMinhaLista,
+  cancelarMinhaLista,
 };
