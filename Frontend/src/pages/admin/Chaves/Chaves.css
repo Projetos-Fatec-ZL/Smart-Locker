@@ -473,3 +473,73 @@ html.dark-theme .chaves-feedback {
     padding: 12px;
   }
 }
+
+/* SELETOR DE STATUS DAS CHAVES */
+
+.chaves-status-select {
+  min-width: 135px;
+  padding: 8px 28px 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s;
+}
+
+.chaves-status-select:focus {
+  box-shadow: 0 0 0 3px rgb(50 107 232 / 15%);
+}
+
+.chaves-status-select:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.chaves-status-select.disponivel {
+  border-color: #a7f3d0;
+  background-color: #dcfce7;
+  color: #047857;
+}
+
+.chaves-status-select.entregue {
+  border-color: #bfdbfe;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.chaves-status-select.extraviada {
+  border-color: #fecaca;
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.chaves-status-select.devolvida {
+  border-color: #fcd34d;
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+/* TEMA ESCURO */
+
+html.dark-theme .chaves-status-select.disponivel {
+  background: #14532d;
+  color: #bbf7d0;
+}
+
+html.dark-theme .chaves-status-select.entregue {
+  background: #1e3a8a;
+  color: #bfdbfe;
+}
+
+html.dark-theme .chaves-status-select.extraviada {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+
+html.dark-theme .chaves-status-select.devolvida {
+  background: #78350f;
+  color: #fde68a;
+}

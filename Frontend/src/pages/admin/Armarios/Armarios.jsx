@@ -405,26 +405,33 @@ function Armarios() {
     }
   }
 
-  // exclui o armario e sua chave vinculada
+  // abre o modal para confirmar a exclusao do armario e da chave vinculada
+  function solicitarExclusao(armario) {
+    setArmarioSelecionado(armario);
+    setModal("confirmar-exclusao");
+    setErro("");
+    setMensagem("");
+  }
+
+  // exclui o armario e sua chave vinculada pelo backend
   async function excluirArmario(armario) {
-    const confirmar = window.confirm(
-      `Tem certeza que deseja excluir o armário ${armario.numero} e sua chave ${armario.chave || ""}?\n\nEssa ação não poderá ser desfeita.`
-    );
-
-    if (!confirmar) return;
-
     try {
       setProcessando(true);
       setErro("");
       setMensagem("");
 
+      // O backend exclui a chave vinculada e depois o armario.
       await requisicao(
         `/api/armarios/${armario._id}`,
         "DELETE"
       );
 
+      fecharModal();
+
       setMensagem(
-        `Armário ${armario.numero} e sua chave foram excluídos com sucesso!`
+        `Armário ${armario.numero} e sua chave ${
+          armario.chave || "vinculada"
+        } foram excluídos com sucesso!`
       );
 
       await carregarDados();
@@ -665,7 +672,7 @@ function Armarios() {
                         backgroundColor: "#fef2f2",
                       }}
                       disabled={processando}
-                      onClick={() => excluirArmario(armario)}
+                      onClick={() => solicitarExclusao(armario)}
                     >
                       Excluir
                     </button>
@@ -676,6 +683,51 @@ function Armarios() {
           </tbody>
         </table>
       </section>
+
+      {/* MODAL CONFIRMAR EXCLUSAO */}
+
+      {modal === "confirmar-exclusao" && armarioSelecionado && (
+        <div className="modal-overlay">
+          <div className="armario-modal modal-exclusao">
+            <div className="modal-exclusao-icone">⚠️</div>
+
+            <h2>Confirmar exclusão</h2>
+
+            <p>
+              Deseja realmente excluir o armário{" "}
+              <strong>{armarioSelecionado.numero}</strong>
+              {armarioSelecionado.chave && (
+                <>
+                  {" "}e sua chave{" "}
+                  <strong>{armarioSelecionado.chave}</strong>
+                </>
+              )}?
+            </p>
+
+            <span className="modal-exclusao-aviso">
+              O armário e a chave vinculada serão excluídos juntos. Essa ação não poderá ser desfeita.
+            </span>
+
+            <div className="modal-botoes">
+              <button
+                className="btn-modal-cancelar"
+                onClick={fecharModal}
+                disabled={processando}
+              >
+                Cancelar
+              </button>
+
+              <button
+                className="btn-modal-excluir"
+                onClick={() => excluirArmario(armarioSelecionado)}
+                disabled={processando}
+              >
+                {processando ? "Excluindo..." : "Excluir"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* MODAL VER */}
 

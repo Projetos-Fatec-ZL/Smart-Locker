@@ -18,12 +18,14 @@ function Chaves() {
 
   const token = sessionStorage.getItem("token");
 
+  // extrai listas das respostas da API
   function extrairLista(dados, propriedade) {
     if (Array.isArray(dados)) return dados;
     if (Array.isArray(dados?.[propriedade])) return dados[propriedade];
     return [];
   }
 
+  // realiza requisicoes autenticadas
   async function requisicao(endpoint, opcoes = {}) {
     const resposta = await fetch(`${API_URL}${endpoint}`, {
       ...opcoes,
@@ -37,23 +39,28 @@ function Chaves() {
     const dados = await resposta.json().catch(() => ({}));
 
     if (!resposta.ok) {
-      throw new Error(dados.mensagem || "Não foi possível realizar a operação.");
+      throw new Error(
+        dados.mensagem || "Não foi possível realizar a operação."
+      );
     }
 
     return dados;
   }
 
+  // carrega os dados do sistema
   async function carregarDados() {
     try {
-      setCarregando(true);
-
-      const [dadosChaves, dadosArmarios, dadosFuncionarios, dadosEspera] =
-        await Promise.all([
-          requisicao("/chaves"),
-          requisicao("/armarios"),
-          requisicao("/funcionarios"),
-          requisicao("/lista-espera"),
-        ]);
+      const [
+        dadosChaves,
+        dadosArmarios,
+        dadosFuncionarios,
+        dadosEspera,
+      ] = await Promise.all([
+        requisicao("/chaves"),
+        requisicao("/armarios"),
+        requisicao("/funcionarios"),
+        requisicao("/lista-espera"),
+      ]);
 
       setChaves(extrairLista(dadosChaves, "chaves"));
       setArmarios(extrairLista(dadosArmarios, "armarios"));
@@ -67,10 +74,10 @@ function Chaves() {
   }
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     carregarDados();
   }, []);
 
+  // identifica o id de uma referencia
   function obterId(referencia) {
     if (!referencia) return null;
 
@@ -79,6 +86,7 @@ function Chaves() {
       : referencia;
   }
 
+  // localiza o armario vinculado
   function obterArmario(chave) {
     if (chave.armario && typeof chave.armario === "object") {
       return chave.armario;
@@ -91,6 +99,7 @@ function Chaves() {
     );
   }
 
+  // localiza o funcionario associado ao armario
   function obterFuncionario(chave) {
     const armarioId = obterId(chave.armario);
 
@@ -125,6 +134,7 @@ function Chaves() {
     (chave) => chave.status === "entregue"
   ).length;
 
+  // filtra as chaves por pesquisa e status
   const chavesFiltradas = useMemo(() => {
     const termo = busca.trim().toLowerCase();
 
@@ -148,24 +158,38 @@ function Chaves() {
     });
   }, [chaves, armarios, funcionarios, busca, filtroStatus]);
 
-  async function atualizarStatus(chave, novoStatus, mensagemSucesso) {
-    try {
-      setAtualizando(obterId(chave));
+  // atualiza o status da chave no banco de dados
+  async function atualizarStatus(chave, novoStatus) {
+    const id = obterId(chave);
 
-      await requisicao(`/chaves/${obterId(chave)}`, {
+    try {
+      setAtualizando(id);
+      setMensagem("");
+
+      await requisicao(`/chaves/${id}`, {
         method: "PUT",
-        body: JSON.stringify({ status: novoStatus }),
+        body: JSON.stringify({
+          status: novoStatus,
+        }),
       });
 
-      setMensagem(mensagemSucesso);
+      setMensagem(
+        `Status da chave ${chave.codigo} atualizado para ${nomeStatus(novoStatus)}!`
+      );
+
       await carregarDados();
     } catch (error) {
-      setMensagem(error.message || "Erro ao atualizar a chave.");
+      setMensagem(
+        error.message || "Erro ao atualizar o status da chave."
+      );
+
+      await carregarDados();
     } finally {
       setAtualizando(null);
     }
   }
 
+  // gera iniciais do funcionario
   function iniciais(nome) {
     if (!nome) return "";
 
@@ -180,11 +204,18 @@ function Chaves() {
 
   return (
     <section className="chaves-page">
+
+      {/* CABEÇALHO */}
+
       <header className="chaves-header">
         <span>CONTROLE DE ACESSO</span>
         <h1>Chaves</h1>
-        <p>Controle de entrega e devolução das chaves dos armários</p>
+        <p>
+          Controle de entrega e devolução das chaves dos armários
+        </p>
       </header>
+
+      {/* INDICADORES */}
 
       <div className="chaves-stats">
         <article className="chaves-stat-card">
@@ -205,6 +236,8 @@ function Chaves() {
           <span>Entregues</span>
         </article>
       </div>
+
+      {/* PESQUISA E FILTROS */}
 
       <div className="chaves-toolbar">
         <input
@@ -228,9 +261,12 @@ function Chaves() {
         </select>
       </div>
 
+      {/* MENSAGEM */}
+
       {mensagem && (
         <div className="chaves-feedback" role="status">
           <span>{mensagem}</span>
+
           <button
             type="button"
             onClick={() => setMensagem("")}
@@ -241,6 +277,8 @@ function Chaves() {
         </div>
       )}
 
+      {/* TABELA */}
+
       <div className="chaves-table-wrapper">
         <table className="chaves-table">
           <thead>
@@ -249,20 +287,19 @@ function Chaves() {
               <th>Armário</th>
               <th>Funcionário</th>
               <th>Status</th>
-              <th>Ação</th>
             </tr>
           </thead>
 
           <tbody>
             {carregando ? (
               <tr>
-                <td colSpan="5" className="chaves-empty">
+                <td colSpan="4" className="chaves-empty">
                   Carregando chaves...
                 </td>
               </tr>
             ) : chavesFiltradas.length === 0 ? (
               <tr>
-                <td colSpan="5" className="chaves-empty">
+                <td colSpan="4" className="chaves-empty">
                   Nenhuma chave encontrada.
                 </td>
               </tr>
@@ -301,69 +338,35 @@ function Chaves() {
                     </td>
 
                     <td>
-                      <span
-                        className={`chaves-status ${classeStatus(chave.status)}`}
+                      <select
+                        className={`chaves-status-select ${classeStatus(chave.status)}`}
+                        value={chave.status || "disponivel"}
+                        aria-label={`Alterar status da chave ${chave.codigo}`}
+                        disabled={atualizando === id}
+                        onChange={(event) =>
+                          atualizarStatus(chave, event.target.value)
+                        }
                       >
-                        <span className="chaves-status-dot" />
-                        {nomeStatus(chave.status)}
-                      </span>
-                    </td>
+                        <option value="disponivel">
+                          Disponível
+                        </option>
 
-                    <td>
-                      {chave.status === "entregue" ? (
-                        <div>
-                          <button
-                            type="button"
-                            className="chaves-action"
-                            disabled={atualizando === id}
-                            onClick={() =>
-                              atualizarStatus(
-                                chave,
-                                "devolvida",
-                                "Devolução registrada. A chave aguarda conferência."
-                              )
-                            }
-                          >
-                            {atualizando === id
-                              ? "Salvando..."
-                              : "↩ Registrar devolução"}
-                          </button>
+                        <option value="entregue">
+                          Entregue
+                        </option>
 
-                          <button
-                            type="button"
-                            className="chaves-action"
-                            disabled={atualizando === id}
-                            onClick={() =>
-                              atualizarStatus(
-                                chave,
-                                "extraviada",
-                                "Chave registrada como extraviada."
-                              )
-                            }
-                          >
-                            Marcar extraviada
-                          </button>
-                        </div>
-                      ) : chave.status === "devolvida" ? (
-                        <button
-                          type="button"
-                          className="chaves-action primary"
-                          disabled={atualizando === id}
-                          onClick={() =>
-                            atualizarStatus(
-                              chave,
-                              "disponivel",
-                              "Chave liberada e disponível novamente."
-                            )
-                          }
-                        >
-                          {atualizando === id
-                            ? "Salvando..."
-                            : "Liberar chave"}
-                        </button>
-                      ) : (
+                        <option value="extraviada">
+                          Extraviada
+                        </option>
+
+                        <option value="devolvida">
+                          Devolvida
+                        </option>
+                      </select>
+
+                      {atualizando === id && (
                         <span className="chaves-muted">
-                          Sem ação pendente
+                          Salvando...
                         </span>
                       )}
                     </td>
@@ -374,6 +377,7 @@ function Chaves() {
           </tbody>
         </table>
       </div>
+
     </section>
   );
 }
